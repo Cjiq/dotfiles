@@ -25,6 +25,9 @@ rootcheck () {
 cr=`echo $'\n.'`
 cr=${cr%.}
 
+# Set root password
+echo -e "${Cya}Please enter a root password.${RCol}" 
+passwd
 # Pick a hostname
 echo -e -n "${Cya}Please enter a hostname?${RCol} (Default arch)${cr}Use:" 
 read -e -p " " -i "arch" input
@@ -71,16 +74,11 @@ while true; do
             echo -e -n "${Cya}Please enter your preferred keyboard layout.${RCol} (Default sv-latin1)${cr}Use:" 
             read -e -p " " -i "sv-latin1" input
             INSTALL_KEYBOARD_LAYOUT=$input
-            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
+            echo "KEYMAP=$INSTALL_KEYBOARD_LAYOUT" > /etc/vconsole.conf
             break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
-# # Create initial ramdisk environment
-# arch-chroot  mkinitcpio -p linux
-# # Install grub
-# arch-chroot  grub-install --recheck --target=i386-pc $INSTALL_DRIVE
-# arch-chroot  grub-mkconfig -o /boot/grub/grub.cfg
 
 postInstallation()
 {
@@ -99,6 +97,8 @@ postInstallation()
                 read -e -p " " -i "/bin/bash" input
                 INSTALL_USER_SHELL=$input
                 useradd -m -G $INSTALL_USER_GROUPS -s $INSTALL_USER_SHELL $INSTALL_USER_NAME
+                echo -e  "${Cya}Please enter a password for ${Gre}$INSTALL_USER_NAME${RCol}" 
+                passwd $INSTALL_USER_NAME
                 break;
                 ;;
             [Nn]* )
