@@ -155,6 +155,11 @@ echo -e -n "${Cya}Downloading and Installing system! ${Gre}:D${RCol}${cr}"
 pacstrap /mnt base base-devel
 arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh vim
 genfstab -p /mnt >> /mnt/etc/fstab
+# # Create initial ramdisk environment
+arch-chroot /mnt mkinitcpio -p linux
+# Install grub
+arch-chroot /mnt grub-install --recheck --target=i386-pc $INSTALL_DRIVE
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 # arch-chroot fix -----
 # copy arch-chroot-install.sh /mnt/ execute it and remove on finish.
 cp arch-chroot-install.sh /mnt/
