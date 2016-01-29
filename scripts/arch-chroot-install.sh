@@ -51,12 +51,12 @@ done
 echo -e -n "${Cya}Please enter your preferred language.${RCol} (Default en_US.UTF-8)${cr}Use:" 
 read -e -p " " -i "en_US.UTF-8" input
 INSTALL_LANGUAGE=$input
-echo "LANG=$INSTALL_LANGUAGE" > /mnt/etc/locale.conf
-cp /mnt/etc/locale.gen /mnt/etc/locale.gen.bak
-echo "$INSTALL_LANGUAGE UTF-8" > /mnt/etc/locale.gen
+echo "LANG=$INSTALL_LANGUAGE" > /etc/locale.conf
+cp /etc/locale.gen /etc/locale.gen.bak
+echo "$INSTALL_LANGUAGE UTF-8" > /etc/locale.gen
 locale-gen
-rm -f /mnt/etc/locale.gen
-mv /mnt/etc/locale.gen.bak /mnt/etc/locale.gen
+rm -f /etc/locale.gen
+mv /etc/locale.gen.bak /etc/locale.gen
 # Select keyboard layout
 while true; do
     echo -e -n "${Cya}Are you using a standard swedish keyboard?${cr}If so ${Gre}sv-latin1${Cya} will be used as you keyboard layout.${RCol} (Y/n) "
@@ -64,23 +64,23 @@ while true; do
     case $yn in
         [Yy]* )
             INSTALL_KEYBOARD_LAYOUT="sv-latin1"
-            echo $INSTALL_KEYBOARD_LAYOUT > /mnt/etc/vconsole.conf
+            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
             break;
             ;;
         [Nn]* )
             echo -e -n "${Cya}Please enter your preferred keyboard layout.${RCol} (Default sv-latin1)${cr}Use:" 
             read -e -p " " -i "sv-latin1" input
             INSTALL_KEYBOARD_LAYOUT=$input
-            echo $INSTALL_KEYBOARD_LAYOUT > /mnt/etc/vconsole.conf
+            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
             break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 # # Create initial ramdisk environment
-# arch-chroot /mnt mkinitcpio -p linux
+# arch-chroot  mkinitcpio -p linux
 # # Install grub
-# arch-chroot /mnt grub-install --recheck --target=i386-pc $INSTALL_DRIVE
-# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+# arch-chroot  grub-install --recheck --target=i386-pc $INSTALL_DRIVE
+# arch-chroot  grub-mkconfig -o /boot/grub/grub.cfg
 
 postInstallation()
 {
