@@ -182,11 +182,11 @@ echo -e -n "${Cya}Please enter your preferred language.${RCol} (Default en_US.UT
 read -e -p " " -i "en_US.UTF-8" input
 INSTALL_LANGUAGE=$input
 echo "LANG=$INSTALL_LANGUAGE" > /etc/locale.conf
-cp /etc/locale.gen /etc/locale.gen.bak
-echo $INSTALL_LANGUAGE > /etc/locale.gen
-locale-gen
-rm -f /etc/locale.gen
-mv /etc/locale.gen.bak /etc/locale.gen
+arch-chroot /mnt cp /etc/locale.gen /etc/locale.gen.bak
+arch-chroot /mnt echo $INSTALL_LANGUAGE > /etc/locale.gen
+arch-chroot /mnt locale-gen
+arch-chroot /mnt rm -f /etc/locale.gen
+arch-chroot /mnt mv /etc/locale.gen.bak /etc/locale.gen
 # Select keyboard layout
 while true; do
     echo -e -n "${Cya}Are you using a standard swedish keyboard?${cr}If so ${Gre}sv-latin1${Cya} will be used as you keyboard layout.${RCol} (Y/n) "
@@ -194,23 +194,23 @@ while true; do
     case $yn in
         [Yy]* )
             INSTALL_KEYBOARD_LAYOUT="sv-latin1"
-            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
+            arch-chroot /mnt echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
             break;
             ;;
         [Nn]* )
             echo -e -n "${Cya}Please enter your preferred keyboard layout.${RCol} (Default sv-latin1)${cr}Use:" 
             read -e -p " " -i "sv-latin1" input
             INSTALL_KEYBOARD_LAYOUT=$input
-            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
+            arch-chroot /mnt echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
             break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 # Create initial ramdisk environment
-mkinitcpio -p linux
+arch-chroot /mnt mkinitcpio -p linux
 # Install grub
-grub-install --recheck --target=i386-pc $INSTALL_DRIVE
-grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt grub-install --recheck --target=i386-pc $INSTALL_DRIVE
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 postInstallation()
 {
@@ -228,7 +228,7 @@ postInstallation()
                 echo -e -n "${Cya}Please enter your preferred shell.${RCol} (Default /bin/bash)${cr}Use:" 
                 read -e -p " " -i "/bin/bash" input
                 INSTALL_USER_SHELL=$input
-                useradd -m -G $INSTALL_USER_GROUPS -s $INSTALL_USER_SHELL $INSTALL_USER_NAME
+                arch-chroot /mnt useradd -m -G $INSTALL_USER_GROUPS -s $INSTALL_USER_SHELL $INSTALL_USER_NAME
                 break;
                 ;;
             [Nn]* )
@@ -246,11 +246,11 @@ postInstallation()
                     read yn
                     case $yn in
                         [Yy]* )
-                            visudo
+                            arch-chroot /mnt visudo
                             break;
                             ;;
                         [Nn]* )
-                            nano /etc/sudoers
+                            arch-chroot /mnt nano /etc/sudoers
                             break;;
                         * ) echo "Please answer yes or no.";;
                     esac
@@ -272,15 +272,15 @@ postInstallation()
                     read yn
                     case $yn in
                         [Yy]* )
-                            pacman -S --noconfirm xf86-video-vesa xorg-server xorg-server-utils
-                            pacman -S --noconfirm virtualbox-guest-utils
-                            pacman -S --noconfirm virtualbox-guest-modules
-                            pacman -S --noconfirm virtualbox-guest-modules-lts
-                            pacman -S --noconfirm virtualbox-guest-dkms
-                            echo "vboxguest" > /etc/modules-load.d/virtualbox.conf
-                            echo "vboxsf" >> /etc/modules-load.d/virtualbox.conf
-                            echo "vboxvideo" >> /etc/modules-load.d/virtualbox.conf
-                            systemctl enable vboxservice.service
+                            arch-chroot /mnt pacman -S --noconfirm xf86-video-vesa xorg-server xorg-server-utils
+                            arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-utils
+                            arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-modules
+                            arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-modules-lts
+                            arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-dkms
+                            arch-chroot /mnt echo "vboxguest" > /etc/modules-load.d/virtualbox.conf
+                            arch-chroot /mnt echo "vboxsf" >> /etc/modules-load.d/virtualbox.conf
+                            arch-chroot /mnt echo "vboxvideo" >> /etc/modules-load.d/virtualbox.conf
+                            arch-chroot /mnt systemctl enable vboxservice.service
                             break;
                             ;;
                         [Nn]* )
@@ -293,8 +293,8 @@ postInstallation()
                     read yn
                     case $yn in
                         [Yy]* )
-                            pacman -S --noconfirm gnome gdm
-                            systemctl enable gdm.service
+                            arch-chroot /mnt pacman -S --noconfirm gnome gdm
+                            arch-chroot /mnt systemctl enable gdm.service
                             break;
                             ;;
                         [Nn]* )
@@ -335,13 +335,12 @@ while true; do
             break;
             ;;
         [Nn]* )
-            break;;
-        * ) echo "Please answer yes or no.";;
+ echo "           break;;
+   "     *  echo "Please answer yes or no.";;
     esac
 done
 
 # Done. Exit out of chroot and unmount everything
-exit
 if [[ ! -z "$BOOT_PARTITION" ]]; then
     umount $BOOT_PARTITION
 fi
