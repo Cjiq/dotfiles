@@ -204,8 +204,8 @@ while true; do
             postInstallation
             break;
             ;;
-        [Nn]* )
- echo "           break;;
-   "     *  echo "Please answer yes or no.";;
+				[Nn]* )
+						break;;
+				* ) echo "Please answer yes or no.";;
     esac
 done
