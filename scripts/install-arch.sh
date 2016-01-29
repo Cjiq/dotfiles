@@ -29,7 +29,7 @@ cr=${cr%.}
 # Check root!
 rootcheck
 # Fetch arch-chroot-install.sh
-wget https://raw.githubusercontent.com/Cjiq/dotfiles/scripts/arch-chroot-install.sh -O arch-chroot-install.sh
+wget https://raw.githubusercontent.com/Cjiq/dotfiles/master/scripts/arch-chroot-install.sh -O arch-chroot-install.sh
 echo -e -n "${Cya}Which /dev/sdx do you which to use?${RCol} (Default /dev/sda)${cr}Use:" 
 
 # Prompt user for correct harddrive
