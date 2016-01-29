@@ -154,7 +154,6 @@ echo -e -n "${Cya}Downloading and Installing system! ${Gre}:D${RCol}${cr}"
 pacstrap /mnt base base-devel
 arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh
 genfstab -p /mnt >> /mnt/etc/fstab
-arch-chroot /mnt /bin/bash
 # Pick a hostname
 echo -e -n "${Cya}Please enter a hostname?${RCol} (Default arch)${cr}Use:" 
 read -e -p " " -i "arch" input
