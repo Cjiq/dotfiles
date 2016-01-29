@@ -57,7 +57,8 @@ gdisk $INSTALL_DRIVE
 handleCustomPartition()
 {
     while true; do
-        read -p "Custom boot partition? (Y/n) " yn
+        echo -e -n "${Cya}Custom boot partition?${RCol} (Y/n) "
+        read yn
         case $yn in
             [Yy]* )
                 echo -e -n "${Cya}Which partition did you pick as your boot partition?${RCol} (Default ${INSTALL_DRIVE}2)${cr}Use:" 
@@ -72,7 +73,8 @@ handleCustomPartition()
         esac
     done
     while true; do
-        read -p "Custom root partition? (Y/n) " yn
+        echo -e -n "${Cya}Custom root partition?${RCol} (Y/n) "
+        read yn
         case $yn in
             [Yy]* )
                 echo -e -n "${Cya}Which partition did you pick as your root partition?${RCol} (Default ${INSTALL_DRIVE}3)${cr}Use:" 
@@ -87,7 +89,8 @@ handleCustomPartition()
         esac
     done
     while true; do
-        read -p "Custom swap partition? (Y/n) " yn
+        echo -e -n "${Cya}Custom swap partition?${RCol} (Y/n) "
+        read yn
         case $yn in
             [Yy]* )
                 echo -e -n "${Cya}Which partition did you pick as your swap partition?${RCol} (Default ${INSTALL_DRIVE}4)${cr}Use:" 
@@ -102,7 +105,8 @@ handleCustomPartition()
         esac
     done
     while true; do
-        read -p "Custom home partition? (Y/n) " yn
+        echo -e -n "${Cya}Custom home partition?${RCol} (Y/n) "
+        read yn
         case $yn in
             [Yy]* )
                 echo -e -n "${Cya}Which partition did you pick as your home partition?${RCol} (Default ${INSTALL_DRIVE}5)${cr}Use:" 
@@ -118,7 +122,8 @@ handleCustomPartition()
     done
 }
 while true; do
-    read -p "Did you partition according to my setup? If not you will have to input some extra configuration. (Y/n) " yn
+    echo -e -n "${Cya}Did you partition according to my setup? If not you will have to input some extra configuration.${RCol} (Y/n) "
+    read yn
     case $yn in
         [Yy]* )
             
@@ -128,48 +133,223 @@ while true; do
     esac
 done
 
-echo "mkfs.ext4 $ROOT_PARTITION"
-echo "mkdir -p /mnt"
-echo "mount $ROOT_PARTITION /mnt"
+mkfs.ext4 $ROOT_PARTITION
+mkdir -p /mnt
+mount $ROOT_PARTITION /mnt
 if [[ ! -z "$BOOT_PARTITION" ]]; then
-    echo "   mkfs.ext4 $BOOT_PARTITION"
-    echo "   mkdir /mnt/boot"
-    echo "   mount $BOOT_PARTITION /mnt/boot"
+    mkfs.ext4 $BOOT_PARTITION
+    mkdir /mnt/boot
+    mount $BOOT_PARTITION /mnt/boot
 fi
 if [[ ! -z "$HOME_PARTITION" ]]; then
-    echo "   mkfs.ext4 $HOME_PARTITION"
-    echo "   mkdir /mnt/home"
-    echo "   mount $HOME_PARTITION /mnt/home"
+    mkfs.ext4 $HOME_PARTITION
+    mkdir /mnt/home
+    mount $HOME_PARTITION /mnt/home
 fi
 if [[ ! -z "$SWAP_PARTITION" ]]; then
-    echo "   mkswap $SWAP_PARTITION"
-    echo "   swapon $SWAP_PARTITION"
+    mkswap $SWAP_PARTITION
+    swapon $SWAP_PARTITION
 fi
-echo -e -n "${Cya}Installing system! ${Gre}:D${RCol}${cr}" 
-echo "pacstrap /mnt base base-devel"
-echo "arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux"
-echo "genfstab -p /mnt >> /mnt/etc/fstab"
-echo "arch-chroot /mnt /bin/bash"
+echo -e -n "${Cya}Downloading and Installing system! ${Gre}:D${RCol}${cr}" 
+pacstrap /mnt base base-devel
+arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh
+genfstab -p /mnt >> /mnt/etc/fstab
+arch-chroot /mnt /bin/bash
 # Pick a hostname
 echo -e -n "${Cya}Please enter a hostname?${RCol} (Default arch)${cr}Use:" 
 read -e -p " " -i "arch" input
 INSTALL_HOSTNAME=$input
-echo "echo $INSTALL_HOSTNAME > /etc/hostname"
+echo $INSTALL_HOSTNAME > /etc/hostname
 # Enter zoneinfo
 while true; do
     echo -e -n "${Cya}Is ${Gre}Europe/Stockholm${Cya} your current timezone?${RCol} (Y/n) "
     read yn
     case $yn in
         [Yy]* )
-            echo "ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime"
+            ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
             break;
             ;;
         [Nn]* )
             echo -e -n "${Cya}Please enter your preferred timezone.${RCol} (e.g Europe/Stockholm)${cr}Use:" 
             read -e -p " " -i "Europe/Stockholm" input
-            echo "ln -s /usr/share/zoneinfo/$input /etc/localtime"
+            ln -s /usr/share/zoneinfo/$input /etc/localtime
+            break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+# Select locale
+echo -e -n "${Cya}Please enter your preferred language.${RCol} (Default en_US.UTF-8)${cr}Use:" 
+read -e -p " " -i "en_US.UTF-8" input
+INSTALL_LANGUAGE=$input
+echo "LANG=$INSTALL_LANGUAGE" > /etc/locale.conf
+cp /etc/locale.gen /etc/locale.gen.bak
+echo $INSTALL_LANGUAGE > /etc/locale.gen
+locale-gen
+rm -f /etc/locale.gen
+mv /etc/locale.gen.bak /etc/locale.gen
+# Select keyboard layout
+while true; do
+    echo -e -n "${Cya}Are you using a standard swedish keyboard?${cr}If so ${Gre}sv-latin1${Cya} will be used as you keyboard layout.${RCol} (Y/n) "
+    read yn
+    case $yn in
+        [Yy]* )
+            INSTALL_KEYBOARD_LAYOUT="sv-latin1"
+            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
+            break;
+            ;;
+        [Nn]* )
+            echo -e -n "${Cya}Please enter your preferred keyboard layout.${RCol} (Default sv-latin1)${cr}Use:" 
+            read -e -p " " -i "sv-latin1" input
+            INSTALL_KEYBOARD_LAYOUT=$input
+            echo $INSTALL_KEYBOARD_LAYOUT > /etc/vconsole.conf
+            break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+# Create initial ramdisk environment
+mkinitcpio -p linux
+# Install grub
+grub-install --recheck --target=i386-pc $INSTALL_DRIVE
+grub-mkconfig -o /boot/grub/grub.cfg
+
+postInstallation()
+{
+    while true; do
+        echo -e -n "${Cya}Do you wish to create a new user account?${RCol} (Y/n) "
+        read yn
+        case $yn in
+            [Yy]* )
+                echo -e -n "${Cya}Please enter your preferred user name.${RCol} (Default archi)${cr}Use:" 
+                read -e -p " " -i "archi" input
+                INSTALL_USER_NAME=$input
+                echo -e -n "${Cya}Please enter your preferred groups.${RCol} (Default wheel,uucp)${cr}Use:" 
+                read -e -p " " -i "wheel,uucp" input
+                INSTALL_USER_GROUPS=$input
+                echo -e -n "${Cya}Please enter your preferred shell.${RCol} (Default /bin/bash)${cr}Use:" 
+                read -e -p " " -i "/bin/bash" input
+                INSTALL_USER_SHELL=$input
+                useradd -m -G $INSTALL_USER_GROUPS -s $INSTALL_USER_SHELL $INSTALL_USER_NAME
+                break;
+                ;;
+            [Nn]* )
+                break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+    while true; do
+        echo -e -n "${Cya}Do you wish to configure sudo?${RCol} (Y/n) "
+        read yn
+        case $yn in
+            [Yy]* )
+                while true; do
+                    echo -e -n "${Cya}Are you familiar with vi?${RCol} (Y/n) "
+                    read yn
+                    case $yn in
+                        [Yy]* )
+                            visudo
+                            break;
+                            ;;
+                        [Nn]* )
+                            nano /etc/sudoers
+                            break;;
+                        * ) echo "Please answer yes or no.";;
+                    esac
+                done
+                break;
+                ;;
+            [Nn]* )
+                break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+    while true; do
+        echo -e -n "${Cya}Do you wish to configure video and install a display environment like gnome?${RCol} (Y/n) "
+        read yn
+        case $yn in
+            [Yy]* )
+                while true; do
+                    echo -e -n "${Cya}Are you installing in VirtualBox?${RCol} (Y/n) "
+                    read yn
+                    case $yn in
+                        [Yy]* )
+                            pacman -S --noconfirm xf86-video-vesa xorg-server xorg-server-utils
+                            pacman -S --noconfirm virtualbox-guest-utils
+                            pacman -S --noconfirm virtualbox-guest-modules
+                            pacman -S --noconfirm virtualbox-guest-modules-lts
+                            pacman -S --noconfirm virtualbox-guest-dkms
+                            echo "vboxguest" > /etc/modules-load.d/virtualbox.conf
+                            echo "vboxsf" >> /etc/modules-load.d/virtualbox.conf
+                            echo "vboxvideo" >> /etc/modules-load.d/virtualbox.conf
+                            systemctl enable vboxservice.service
+                            break;
+                            ;;
+                        [Nn]* )
+                            break;;
+                        * ) echo "Please answer yes or no.";;
+                    esac
+                done
+                while true; do
+                    echo -e -n "${Cya}Do you whish to install gnome?${RCol} (Y/n) "
+                    read yn
+                    case $yn in
+                        [Yy]* )
+                            pacman -S --noconfirm gnome gdm
+                            systemctl enable gdm.service
+                            break;
+                            ;;
+                        [Nn]* )
+                            while true; do
+                                echo -e "${Cya}Sorry, no other desktop environments are currently supported by this script. ${Red}:(${Cya}"
+                                echo -e -n "${Cya}Do you want to install gnome anyways?${RCol} (Y/n) "
+                                read yn
+                                case $yn in
+                                    [Yy]* )
+                                        break;
+                                        ;;
+                                    [Nn]* )
+                                        break 2;;
+                                    * ) echo "Please answer yes or no.";;
+                                esac
+                            done
+                            ;;
+                        * ) echo "Please answer yes or no.";;
+                    esac
+                done
+
+                break;
+                ;;
+            [Nn]* )
+                break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+    echo -e "${Cya}PostInstallation is now completed! Yey! Your computer will now restart. ${RCol}"
+}
+
+while true; do
+    echo -e -n "${Cya}Installation is now completed! Yey! ${Gre}:D${Cya}${cr}Do you wish to do some post installation stuff or just exit script?${RCol} (Y/n) "
+    read yn
+    case $yn in
+        [Yy]* )
+            postInstallation
+            break;
+            ;;
+        [Nn]* )
             break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
+# Done. Exit out of chroot and unmount everything
+exit
+if [[ ! -z "$BOOT_PARTITION" ]]; then
+    umount $BOOT_PARTITION
+fi
+if [[ ! -z "$HOME_PARTITION" ]]; then
+    umount $HOME_PARTITION
+fi
+if [[ ! -z "$SWAP_PARTITION" ]]; then
+    swapoff $SWAP_PARTITION
+fi
+umount $ROOT_PARTITION
+reboot
