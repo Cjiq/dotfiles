@@ -159,20 +159,20 @@ arch-chroot /mnt /bin/bash
 echo -e -n "${Cya}Please enter a hostname?${RCol} (Default arch)${cr}Use:" 
 read -e -p " " -i "arch" input
 INSTALL_HOSTNAME=$input
-echo $INSTALL_HOSTNAME > /etc/hostname
+arch-chroot /mnt echo $INSTALL_HOSTNAME > /etc/hostname
 # Enter zoneinfo
 while true; do
     echo -e -n "${Cya}Is ${Gre}Europe/Stockholm${Cya} your current timezone?${RCol} (Y/n) "
     read yn
     case $yn in
         [Yy]* )
-            ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
+            arch-chroot /mnt ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
             break;
             ;;
         [Nn]* )
             echo -e -n "${Cya}Please enter your preferred timezone.${RCol} (e.g Europe/Stockholm)${cr}Use:" 
             read -e -p " " -i "Europe/Stockholm" input
-            ln -s /usr/share/zoneinfo/$input /etc/localtime
+            arch-chroot /mnt ln -s /usr/share/zoneinfo/$input /etc/localtime
             break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -181,7 +181,7 @@ done
 echo -e -n "${Cya}Please enter your preferred language.${RCol} (Default en_US.UTF-8)${cr}Use:" 
 read -e -p " " -i "en_US.UTF-8" input
 INSTALL_LANGUAGE=$input
-echo "LANG=$INSTALL_LANGUAGE" > /etc/locale.conf
+arch-chroot /mnt echo "LANG=$INSTALL_LANGUAGE" > /etc/locale.conf
 arch-chroot /mnt cp /etc/locale.gen /etc/locale.gen.bak
 arch-chroot /mnt echo $INSTALL_LANGUAGE > /etc/locale.gen
 arch-chroot /mnt locale-gen
