@@ -170,7 +170,7 @@ while true; do
                         echo "Server = http://ftp.acc.umu.se/mirror/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
                         echo "Server = http://mirror.neuf.no/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
                         echo "Server = http://mirrors.atviras.lt/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
-
+                        pacman -Syyu
                         break;;
                     [Nn]* )
                         echo -e -n "${Cya}Sorry this script does not support any ther countries atm.${RCol} (Y/n) " 
