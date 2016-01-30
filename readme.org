@@ -6,7 +6,7 @@ useful scritps.
 *** Intro
 This is a simple installation script made for Arch Linux. After downloading and 
 reinstalling Arch on various systems and virtual machines I came to the 
-conclution that a simple script, using my standard configuration, would not
+conclusion that a simple script, using my standard configuration, would not
 be that bad.
 
 Feel free to use it if you feel like it can be helpful in any way
