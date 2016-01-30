@@ -162,6 +162,7 @@ while true; do
                 read yn
                 case $yn in
                     [Yy]* )
+                        MIRRORLIST=true
                         cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
                         echo "Server = http://ftp.lysator.liu.se/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
@@ -196,194 +197,12 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 # arch-chroot fix -----
 # copy arch-chroot-install.sh /mnt/ execute it and remove on finish.
 cp arch-chroot-install.sh /mnt/
-cp -rf /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
+if [[ ! -z "$MIRRORLIST" ]]; then
+    cp -rf /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
+fi
 arch-chroot /mnt chmod +x arch-chroot-install.sh
 arch-chroot /mnt ./arch-chroot-install.sh
 rm -f /mnt/arch-chroot-install.sh
-# # Pick a hostname
-# echo -e -n "${Cya}Please enter a hostname?${RCol} (Default arch)${cr}Use:" 
-# read -e -p " " -i "arch" input
-# INSTALL_HOSTNAME=$input
-# arch-chroot /mnt echo $INSTALL_HOSTNAME > /etc/hostname
-# # Enter zoneinfo
-# while true; do
-#     echo -e -n "${Cya}Is ${Gre}Europe/Stockholm${Cya} your current timezone?${RCol} (Y/n) "
-#     read yn
-#     case $yn in
-#         [Yy]* )
-#             arch-chroot /mnt ln -s /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
-#             break;
-#             ;;
-#         [Nn]* )
-#             echo -e -n "${Cya}Please enter your preferred timezone.${RCol} (e.g Europe/Stockholm)${cr}Use:" 
-#             read -e -p " " -i "Europe/Stockholm" input
-#             arch-chroot /mnt ln -s /usr/share/zoneinfo/$input /etc/localtime
-#             break;;
-#         * ) echo "Please answer yes or no.";;
-#     esac
-# done
-# # Select locale
-# echo -e -n "${Cya}Please enter your preferred language.${RCol} (Default en_US.UTF-8)${cr}Use:" 
-# read -e -p " " -i "en_US.UTF-8" input
-# INSTALL_LANGUAGE=$input
-# echo "LANG=$INSTALL_LANGUAGE" > /mnt/etc/locale.conf
-# cp /mnt/etc/locale.gen /mnt/etc/locale.gen.bak
-# echo "$INSTALL_LANGUAGE UTF-8" > /mnt/etc/locale.gen
-# arch-chroot /mnt locale-gen
-# rm -f /mnt/etc/locale.gen
-# mv /mnt/etc/locale.gen.bak /mnt/etc/locale.gen
-# # Select keyboard layout
-# while true; do
-#     echo -e -n "${Cya}Are you using a standard swedish keyboard?${cr}If so ${Gre}sv-latin1${Cya} will be used as you keyboard layout.${RCol} (Y/n) "
-#     read yn
-#     case $yn in
-#         [Yy]* )
-#             INSTALL_KEYBOARD_LAYOUT="sv-latin1"
-#             echo $INSTALL_KEYBOARD_LAYOUT > /mnt/etc/vconsole.conf
-#             break;
-#             ;;
-#         [Nn]* )
-#             echo -e -n "${Cya}Please enter your preferred keyboard layout.${RCol} (Default sv-latin1)${cr}Use:" 
-#             read -e -p " " -i "sv-latin1" input
-#             INSTALL_KEYBOARD_LAYOUT=$input
-#             echo $INSTALL_KEYBOARD_LAYOUT > /mnt/etc/vconsole.conf
-#             break;;
-#         * ) echo "Please answer yes or no.";;
-#     esac
-# done
-# # Create initial ramdisk environment
-# arch-chroot /mnt mkinitcpio -p linux
-# # Install grub
-# arch-chroot /mnt grub-install --recheck --target=i386-pc $INSTALL_DRIVE
-# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
-
-# postInstallation()
-# {
-#     while true; do
-#         echo -e -n "${Cya}Do you wish to create a new user account?${RCol} (Y/n) "
-#         read yn
-#         case $yn in
-#             [Yy]* )
-#                 echo -e -n "${Cya}Please enter your preferred user name.${RCol} (Default archi)${cr}Use:" 
-#                 read -e -p " " -i "archi" input
-#                 INSTALL_USER_NAME=$input
-#                 echo -e -n "${Cya}Please enter your preferred groups.${RCol} (Default wheel,uucp)${cr}Use:" 
-#                 read -e -p " " -i "wheel,uucp" input
-#                 INSTALL_USER_GROUPS=$input
-#                 echo -e -n "${Cya}Please enter your preferred shell.${RCol} (Default /bin/bash)${cr}Use:" 
-#                 read -e -p " " -i "/bin/bash" input
-#                 INSTALL_USER_SHELL=$input
-#                 arch-chroot /mnt useradd -m -G $INSTALL_USER_GROUPS -s $INSTALL_USER_SHELL $INSTALL_USER_NAME
-#                 break;
-#                 ;;
-#             [Nn]* )
-#                 break;;
-#             * ) echo "Please answer yes or no.";;
-#         esac
-#     done
-#     while true; do
-#         echo -e -n "${Cya}Do you wish to configure sudo?${RCol} (Y/n) "
-#         read yn
-#         case $yn in
-#             [Yy]* )
-#                 while true; do
-#                     echo -e -n "${Cya}Are you familiar with vi?${RCol} (Y/n) "
-#                     read yn
-#                     case $yn in
-#                         [Yy]* )
-#                             arch-chroot /mnt visudo
-#                             break;
-#                             ;;
-#                         [Nn]* )
-#                             arch-chroot /mnt nano /etc/sudoers
-#                             break;;
-#                         * ) echo "Please answer yes or no.";;
-#                     esac
-#                 done
-#                 break;
-#                 ;;
-#             [Nn]* )
-#                 break;;
-#             * ) echo "Please answer yes or no.";;
-#         esac
-#     done
-#     while true; do
-#         echo -e -n "${Cya}Do you wish to configure video and install a display environment like gnome?${RCol} (Y/n) "
-#         read yn
-#         case $yn in
-#             [Yy]* )
-#                 while true; do
-#                     echo -e -n "${Cya}Are you installing in VirtualBox?${RCol} (Y/n) "
-#                     read yn
-#                     case $yn in
-#                         [Yy]* )
-#                             arch-chroot /mnt pacman -S --noconfirm xf86-video-vesa xorg-server xorg-server-utils
-#                             arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-utils
-#                             arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-modules
-#                             arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-modules-lts
-#                             arch-chroot /mnt pacman -S --noconfirm virtualbox-guest-dkms
-#                             arch-chroot /mnt echo "vboxguest" > /etc/modules-load.d/virtualbox.conf
-#                             arch-chroot /mnt echo "vboxsf" >> /etc/modules-load.d/virtualbox.conf
-#                             arch-chroot /mnt echo "vboxvideo" >> /etc/modules-load.d/virtualbox.conf
-#                             arch-chroot /mnt systemctl enable vboxservice.service
-#                             break;
-#                             ;;
-#                         [Nn]* )
-#                             break;;
-#                         * ) echo "Please answer yes or no.";;
-#                     esac
-#                 done
-#                 while true; do
-#                     echo -e -n "${Cya}Do you whish to install gnome?${RCol} (Y/n) "
-#                     read yn
-#                     case $yn in
-#                         [Yy]* )
-#                             arch-chroot /mnt pacman -S --noconfirm gnome gdm
-#                             arch-chroot /mnt systemctl enable gdm.service
-#                             break;
-#                             ;;
-#                         [Nn]* )
-#                             while true; do
-#                                 echo -e "${Cya}Sorry, no other desktop environments are currently supported by this script. ${Red}:(${Cya}"
-#                                 echo -e -n "${Cya}Do you want to install gnome anyways?${RCol} (Y/n) "
-#                                 read yn
-#                                 case $yn in
-#                                     [Yy]* )
-#                                         break;
-#                                         ;;
-#                                     [Nn]* )
-#                                         break 2;;
-#                                     * ) echo "Please answer yes or no.";;
-#                                 esac
-#                             done
-#                             ;;
-#                         * ) echo "Please answer yes or no.";;
-#                     esac
-#                 done
-
-#                 break;
-#                 ;;
-#             [Nn]* )
-#                 break;;
-#             * ) echo "Please answer yes or no.";;
-#         esac
-#     done
-#     echo -e "${Cya}PostInstallation is now completed! Yey! Your computer will now restart. ${RCol}"
-# }
-
-# while true; do
-#     echo -e -n "${Cya}Installation is now completed! Yey! ${Gre}:D${Cya}${cr}Do you wish to do some post installation stuff or just exit script?${RCol} (Y/n) "
-#     read yn
-#     case $yn in
-#         [Yy]* )
-#             postInstallation
-#             break;
-#             ;;
-#         [Nn]* )
-#  echo "           break;;
-#    "     *  echo "Please answer yes or no.";;
-#     esac
-# done
 
 # Done. Exit out of chroot and unmount everything
 if [[ ! -z "$BOOT_PARTITION" ]]; then
