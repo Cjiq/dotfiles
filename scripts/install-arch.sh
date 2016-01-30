@@ -151,6 +151,39 @@ if [[ ! -z "$SWAP_PARTITION" ]]; then
     mkswap $SWAP_PARTITION
     swapon $SWAP_PARTITION
 fi
+
+while true; do
+    echo -e -n "${Cya}Do you whish to optimise the installer mirrors according to your current location?${RCol} (Y/n) " 
+    read yn
+    case $yn in
+        [Yy]* )
+            while true; do
+                echo -e -n "${Cya}Are you in ${Gre}Sweden?${RCol} (Y/n) " 
+                read yn
+                case $yn in
+                    [Yy]* )
+                        cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
+
+                        echo "Server = http://ftp.lysator.liu.se/pub/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+                        echo "Server = http://archlinux.dynamict.se/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = http://mirror.yandex.ru/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = http://ftp.acc.umu.se/mirror/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = http://mirror.neuf.no/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = http://mirrors.atviras.lt/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
+
+                        break;;
+                    [Nn]* )
+                        echo -e -n "${Cya}Sorry this script does not support any ther countries atm.${RCol} (Y/n) " 
+                        break;;
+                    * ) echo "Please answer yes or no.";;
+                esac
+            done
+            break;;
+        [Nn]* )
+            break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 echo -e -n "${Cya}Downloading and Installing system! ${Gre}:D${RCol}${cr}" 
 pacstrap /mnt base base-devel
 arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh vim
@@ -163,6 +196,7 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 # arch-chroot fix -----
 # copy arch-chroot-install.sh /mnt/ execute it and remove on finish.
 cp arch-chroot-install.sh /mnt/
+cp -rf /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 arch-chroot /mnt chmod +x arch-chroot-install.sh
 arch-chroot /mnt ./arch-chroot-install.sh
 rm -f /mnt/arch-chroot-install.sh
