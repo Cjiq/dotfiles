@@ -171,6 +171,8 @@ while true; do
                         echo "Server = http://mirror.neuf.no/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
                         echo "Server = http://mirrors.atviras.lt/archlinux/$repo/os/$arch" >> /etc/pacman.d/mirrorlist
                         pacman -Syyu
+                        cat /etc/pacman.d/mirrorlist
+                        sleep 3000
                         break;;
                     [Nn]* )
                         echo -e -n "${Cya}Sorry this script does not support any ther countries atm.${RCol} (Y/n) " 
