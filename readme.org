@@ -1,7 +1,7 @@
 #+OPTIONS: toc: nil
 * dotfiles
 This repo is supposed to a hub for all my different configuration files and 
-usefull scritps.
+useful scritps.
 ** install-arch.sh
 *** Intro
 This is a simple installation script made for Arch Linux. After downloading and 
