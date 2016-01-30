@@ -6,7 +6,7 @@ usefull scritps.
 *** Intro
 This is a simple installation script made for Arch Linux. After downloading and 
 reinstalling Arch on various systems and virtual machines I came to the 
-conclution that a simple script using my standard configuration would not
+conclution that a simple script, using my standard configuration, would not
 be that bad.
 
 Feel free to use it if you feel like it can be helpful in any way
@@ -22,10 +22,17 @@ wget install-arch.cjiq.tk -O install-arch.sh && chmod +x install-arch.sh
 
 Example using curl
 #+BEGIN_SRC sh
-curl -o install-arch.sh install-arch.cjiq.tk && chmod +x install-arch.sh
+curl -L -o install-arch.sh install-arch.cjiq.tk && chmod +x install-arch.sh
 #+END_SRC sh
+
+Run script by executing
+#+BEGIN_SRC sh
+./install-arch.sh
+#+END_SRC sh
+
+notice: install-arch.cjiq.tk just redirects you to the file found at Github.
 ** Disclaimer
-I will not take any resposability if any of my scritps causes any troubles. 
+I will not take any resposability if any of my scritps causes any trouble. 
 Use them at your own risk. 
 ** License
 MIT
