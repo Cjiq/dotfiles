@@ -48,6 +48,7 @@ sudo pacman -Sy
 # 	  pacman -S vim
 # fi
 sudo pacman -S --noconfirm vim
+# sudo pacman -S --noconfirm --needed pip 
 
 
 rm -rf ~/.vim
@@ -63,4 +64,9 @@ git clone https://github.com/Cjiq/dotvim.git ~/temp-dotfiles
 mv ~/temp-dotfiles/* ~/temp-dotfiles/.[^.]* ~/.vim
 rm -rf ~/temp-dotfiles
 
-ls ~/temp-dotfiles
+# Run vundle plugin install
+vim -E -s -c "source ~/.vim/vimrc" +PluginInstall +qa
+
+# Install patched fonts
+# pip install --user powerline-status
+
