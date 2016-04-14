@@ -84,4 +84,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Random comment
-alias ls="ls -lat"
+alias ls="ls -lat --color=auto"
