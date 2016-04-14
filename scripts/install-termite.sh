@@ -13,14 +13,12 @@ Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    
 Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
 Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
 
-# 1. install vim
-#    1. check system
-#    2. download vim and install
-# 2. install vundle
-# 3. fetch dotvim
+# 1. Download termite
+# 2. Install
+# 3. Move config
 
 while true; do
-	echo -e "${Gre}This script will delete your old .vim and do a clean install. Do you wish to continue? (Y/n)${RCol}"
+  echo -e "${Gre}This script will download and reinstall termite. Do you whish to continue? (Y/n)${RCol}"
   read yn
   case $yn in
     [Yy]* ) break;;
@@ -40,36 +38,12 @@ if [ ! -f "/etc/arch-release" ]; then
     sudo ln -sv /usr/local/bin/pacapt /usr/local/bin/pacman || true
 fi
 
-# Update "pacman"
-sudo pacman -Sy
-sudo pacman -S --noconfirm vim
+sudo pacman -Sy --noconfirm termite
 
-rm -rf ~/.vim
-mkdir -p ~/.vim/bundle/Vundle.vim
-
-# Clone vundle and install to default install location
-git clone https://github.com/VundleVim/Vundle.vim.git ~/temp-vundle
-mv ~/temp-vundle/* ~/temp-vundle/.[^.]* ~/.vim/bundle/Vundle.vim
-rm -rf ~/temp-vundle
-
-# Install dotvim
-git clone https://github.com/Cjiq/dotvim.git ~/temp-dotfiles
-mv ~/temp-dotfiles/* ~/temp-dotfiles/.[^.]* ~/.vim
-rm -rf ~/temp-dotfiles
-
-# Run vundle plugin install
-vim +PluginInstall +qa
-
-# Use same vim settings for root as for user.
-sudo ln -sf /home/${USER}/.vim /.vim 
-
-# Install patched fonts
-# If arch then install patched font.
-if [ -f "/etc/arch-release" ]; then
-		git clone https://github.com/powerline/fonts/ ~/temp-p-fonts
-		cd ~/temp-p-fonts
-		source install.sh
-		rm -rf ~/temp-p-fonts
+if [ ! -d "~/.config/termite" ]; then
+	 mkdir -p ~/.config/termite
 fi
 
-echo -e "${Gre}Installation complete! :D${RCol}"
+cp -f ../termite-config ~/.config/termite/config
+
+echo -e "${Gre} All done! Have a nice day :)${RCol}"
