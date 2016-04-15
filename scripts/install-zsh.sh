@@ -31,19 +31,30 @@ done
 # Detect if the system is running ArchLinux, if not install pacapt
 if [ ! -f "/etc/arch-release" ]; then
     # install pacapt to install vim for most versions of unix/linux systems
-    wget -O /usr/local/bin/pacapt \
-         https://github.com/icy/pacapt/raw/ng/pacapt
 
-    sudo chmod 755 /usr/local/bin/pacapt
+		# Check if it is already installed.
+		hash /usr/local/bin/pacapt 2>&1 || {
+				wget -O /usr/local/bin/pacapt \
+						https://github.com/icy/pacapt/raw/ng/pacapt
 
-    sudo ln -sv /usr/local/bin/pacapt /usr/local/bin/pacman || true
+				sudo chmod 755 /usr/local/bin/pacapt
+
+				sudo ln -sv /usr/local/bin/pacapt /usr/local/bin/pacman || true
+		}
 fi
 
 # Update "pacman"
 sudo pacman -Sy
 # Install zsh
-sudo pacman -R --noconfirm zsh
-sudo pacman -S --noconfirm zsh
+
+#If osx dont use --noconfirm its not supported
+if [[ "$OSTYPE" == "darwin"* ]]; then
+		sudo pacman -R zsh
+		sudo pacman -S zsh
+else
+		sudo pacman -R --noconfirm zsh
+		sudo pacman -S --noconfirm zsh
+fi
 # Install oh-my-zsh
 if [ ! -n "$ZSH" ]; then
     ZSH=~/.oh-my-zsh
