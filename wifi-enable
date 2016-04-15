@@ -1,0 +1,56 @@
+#!/bin/sh
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script will start wifi.
+
+OPTIONS:
+   -h      Show this message
+   -s      Start wifi
+   -x      Stop wifi
+EOF
+}
+stop()
+{
+  echo "Stopping wifi"
+  netctl stop wlp9s0b1-Banankartong
+  ip link set wlp9s0b1 down
+}
+
+start()
+{
+  stop 
+  echo "Starting wifi"
+  ip link set wlp9s0b1 down
+  netctl start wlp9s0b1-Banankartong
+  dhcpcd &
+}
+
+#Check for root access
+if (( $EUID != 0 )); then
+    echo "Please run as root"
+    exit
+fi
+
+while getopts "hsx" OPTION
+do
+  case $OPTION in
+      h)
+        usage
+        exit 1
+        ;;
+      s)
+        start
+        ;;
+      x)
+        stop
+        ;;
+      ?)
+        usage
+        exit
+        ;;
+  esac
+done
