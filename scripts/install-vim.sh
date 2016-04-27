@@ -52,9 +52,9 @@ while true; do
 			brew tap neovim/neovim
 			brew install --HEAD neovim
 		else
-			sudo pacman -Sy --noconfirm nvim
+			sudo pacman -Sy --noconfirm neovim
 		fi
-		ln -s ~/.vim ~/.config/nvim
+		ln -sf ~/.vim ~/.config/nvim
 		echo -e "${Gre}NeoVim installation complete! :D${RCol}"
 		break;;
     [Nn]* ) exit;;
