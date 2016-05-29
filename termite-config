@@ -1,7 +1,7 @@
 # Font
 [options]
-font = Monospace 11
 font = RobotoMono 11
+font = Monospace 11
 cursor_blink = system
 # monokai theme
 [colors]

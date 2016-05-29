@@ -41,8 +41,26 @@ if [ ! -f "/etc/arch-release" ]; then
 fi
 
 # Update "pacman"
-sudo pacman -Sy
-sudo pacman -S --noconfirm vim
+sudo pacman -Sy --noconfirm vim
+
+while true; do
+  echo -e "${Gre}Do you wish to install neovim aswell? (Y/n)${RCol}"
+  read yn
+  case $yn in
+    [Yy]* ) 
+		if [[ "$OSTYPE" == "darwin"* ]]; then
+			brew tap neovim/neovim
+			brew install --HEAD neovim
+		else
+			sudo pacman -Sy --noconfirm neovim
+		fi
+		ln -sf ~/.vim ~/.config/nvim
+		echo -e "${Gre}NeoVim installation complete! :D${RCol}"
+		break;;
+    [Nn]* ) exit;;
+    * ) echo "Please answer yes or no.";;
+  esac
+done
 
 rm -rf ~/.vim
 mkdir -p ~/.vim/bundle/Vundle.vim
