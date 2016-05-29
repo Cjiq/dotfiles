@@ -21,6 +21,8 @@ do
       else
         systemctl restart avahi-daemon
         echo "shairsync is not running"
+        echo "restarting avahi"
+        sleep 10
       fi
   else
     systemctl restart avahi-daemon
