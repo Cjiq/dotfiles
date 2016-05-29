@@ -1,0 +1,11 @@
+[Unit]
+Description=Restarts avahi to make sure shairsync works
+Requires=network.target
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/shairsync-fix.sh
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
