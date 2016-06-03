@@ -4,7 +4,7 @@ Requires=network.target
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/shairsync-fix.sh
+ExecStart=/usr/local/bin/shairport-sync-fix.sh
 Type=simple
 
 [Install]
