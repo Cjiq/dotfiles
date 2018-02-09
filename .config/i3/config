@@ -1,0 +1,120 @@
+#Cjiq i3-gaps config
+
+###---Basic Definitions---###
+#Needed for i3-gaps
+hide_edge_borders both
+for_window [class="^.*"] border pixel 0
+gaps inner 18
+gaps outer 2
+font pango:monospace 12
+
+set $mod Mod4
+set $term termite
+set $browser chromium
+
+# client.unfocused			#1049A9 #104919 #104919 #1049A9
+# client.focused				#1049A9 #1049A9 #104919 #1049A9
+
+#Launch polybar
+exec_always --no-startup-id set-resolution
+exec --no-startup-id spotify
+exec_always --no-startup-id xcompmgr &
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id nm-applet
+#Add wallpaper:
+exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
+
+###---Useful scripts---###
+#Mini math buffer
+#I'll later bind this to mod+a.
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move position center
+for_window [instance="math"] move scratchpad
+exec --no-startup-id $term --title "math"
+
+#FOR ALSA/AMIXER
+# set $inc --no-startup-id amixer sset Master 2%+
+# set $biginc --no-startup-id amixer sset Master 5%+
+# set $dec --no-startup-id amixer sset Master 2%-
+# set $bigdec --no-startup-id amixer sset Master 5%-
+# set $mute --no-startup-id amixer sset Master toggle
+
+#For PULSEAUDIO/PAMIXER
+set $inc --no-startup-id pamixer --allow-boost -i 5
+set $biginc --no-startup-id pamixer --allow-boost -i 15
+set $dec --no-startup-id pamixer --allow-boost -d 5
+set $bigdec --no-startup-id pamixer --allow-boost -d 15
+set $mute --no-startup-id pamixer --allow-boost -t
+
+for_window [class="^Spotify$"] move container to workspace $ws2
+#Make all windows transparet
+for_window [class="^(.*?)$"] exec transset-df -a 0.94
+
+###---Keybindings---###
+bindsym $mod+Return		exec --no-startup-id $term
+bindsym $mod+q			kill
+bindsym $mod+Shift+q	kill
+
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+space		focus mode_toggle
+
+bindsym $mod+Shift+backspace	exec hutdown -h -r now
+
+bindsym $mod+w			exec --no-startup-id $browser
+
+bindsym $mod+r			exec $term -e ranger
+bindsym $mod+d			exec rofi -show run
+
+bindsym $mod+c			exec xclip -o -selection clipboard | xclip
+bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
+
+bindsym $mod+f 			fullscreen toggle
+
+bindsym $mod+a			[instance="math"] scratchpad show; move position center
+bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
+
+bindsym $mod+h 			focus left
+bindsym $mod+Shift+h 	move left 30
+
+bindsym $mod+j 			focus down
+bindsym $mod+Shift+j 	move down 30
+
+bindsym $mod+k 			focus up
+bindsym $mod+Shift+k 	move up 30
+
+bindsym $mod+l 			focus right
+bindsym $mod+Shift+l 	move right 30
+
+bindsym $mod+minus		split vertical ;; exec $term
+bindsym $mod+period		split horizontal ;; exec $term
+
+bindsym $mod+1			workspace $ws1
+bindsym $mod+2			workspace $ws2
+bindsym $mod+3			workspace $ws3
+bindsym $mod+4			workspace $ws4
+bindsym $mod+5			workspace $ws5
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+###---Extra XF86 Keys---###
+#These are the extra media keys that some keyboards have.
+# bindsym XF86AudioMute			exec $mute
+# bindsym XF86AudioLowerVolume	exec $dec
+# bindsym XF86AudioRaiseVolume	exec $inc
+# bindsym XF86KbdBrightnessDown	exec --no-startup-id xbacklight -dec 15
+# bindsym XF86KbdBrightnessUp	exec --no-startup-id xbacklight -inc 15
+# Volume control
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+
+# Play/Pause, change songs
+bindsym XF86AudioPlay exec sp play
+bindsym XF86AudioNext exec sp next
+bindsym XF86AudioPrev exec sp prev
+
