@@ -29,6 +29,12 @@ while true; do
   esac
 done
 
+# Detect if wget is installed
+if [ ! -x /usr/bin/wget ] ; then
+    # some extra check if wget is not installed at the usual place                                                                           
+    command -v wget >/dev/null 2>&1 || { echo >&2 "Please install wget or set it in your path. Aborting."; exit 1; }
+fi
+
 # Detect if the system is running ArchLinux, if not install pacapt
 if [ ! -f "/etc/arch-release" ]; then
     # install pacapt to install vim for most versions of unix/linux systems
@@ -40,8 +46,12 @@ if [ ! -f "/etc/arch-release" ]; then
     sudo ln -sv /usr/local/bin/pacapt /usr/local/bin/pacman || true
 fi
 
-# Update "pacman"
-sudo pacman -Sy --noconfirm vim
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	pacman -S --noconfirm vim
+else
+	sudo pacman -Sy --noconfirm neovim
+fi
 
 while true; do
   echo -e "${Gre}Do you wish to install neovim aswell? (Y/n)${RCol}"
@@ -83,7 +93,7 @@ sudo ln -sf /home/${USER}/.vim /.vim
 
 # Install patched fonts
 # If arch then install patched font.
-if [ -f "/etc/arch-release" ]; then
+if [ -f "/etc/arch-release"]  ||  [[ "$OSTYPE" == "darwin"* ]]; then
 		git clone https://github.com/powerline/fonts/ ~/temp-p-fonts
 		cd ~/temp-p-fonts
 		source install.sh
