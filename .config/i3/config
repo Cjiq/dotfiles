@@ -106,8 +106,8 @@ set $ws5 "5"
 # bindsym XF86AudioMute			exec $mute
 # bindsym XF86AudioLowerVolume	exec $dec
 # bindsym XF86AudioRaiseVolume	exec $inc
-# bindsym XF86KbdBrightnessDown	exec --no-startup-id xbacklight -dec 15
-# bindsym XF86KbdBrightnessUp	exec --no-startup-id xbacklight -inc 15
+bindsym XF86MonBrightnessDown	exec --no-startup-id backlight-mod.sh -15
+bindsym XF86MonBrightnessUp	exec --no-startup-id backlight-mod.sh 15
 # Volume control
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
