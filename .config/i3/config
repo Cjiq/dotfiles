@@ -4,8 +4,10 @@
 #Needed for i3-gaps
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
-gaps inner 18
-gaps outer 2
+# gaps inner 18
+# gaps outer 2
+gaps inner 0
+gaps outer 0
 font pango:monospace 12
 
 set $mod Mod4
@@ -27,11 +29,11 @@ exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
 ###---Useful scripts---###
 #Mini math buffer
 #I'll later bind this to mod+a.
+exec_always --no-startup-id termite -c "$HOME/.config/termite/config-math" --class="math" --name="math" -e "octave_math"
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move position center
 for_window [instance="math"] move scratchpad
-exec --no-startup-id $term --title "math"
 
 #FOR ALSA/AMIXER
 # set $inc --no-startup-id amixer sset Master 2%+
@@ -71,7 +73,9 @@ bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
 
 bindsym $mod+f 			fullscreen toggle
 
-bindsym $mod+a			[instance="math"] scratchpad show; move position center
+# bindsym $mod+a exec $terminal --name math_float; exec "bash -c 'sleep 0.2s;i3-msg floating enable;i3-msg resize set 400px 100px;i3-msg move position 940px 630px'"
+
+bindsym $mod+a			[class="math" instance="math"] scratchpad show; move position center
 bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
 
 bindsym $mod+h 			focus left
