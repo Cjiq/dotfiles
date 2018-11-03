@@ -73,7 +73,7 @@ rm -rf ~/temp-dotfiles
 
 # Run vundle plugin install
 echo -e "Installing vundle plugins. This could take some time.."
-vim +PluginInstall +qa > /dev/null
+vim +PluginInstall +qa
 
 # Use same vim settings for root as for user.
 sudo ln -sf /home/${USER}/.vim /.vim 
