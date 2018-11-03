@@ -3,12 +3,6 @@
 # Load some setup variables
 source "${BASH_SOURCE%/*}/prepare.sh"
 
-if [[ $DIST == "centos" ]]; then
-	echo "centos!!"
-elif [[ $DIST == "arch" ]]; then
-	echo "arch!!"
-fi
-
 # 1. install vim
 #    1. check system
 #    2. download vim and install
