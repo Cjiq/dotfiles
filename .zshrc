@@ -89,10 +89,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls="ls -latG"
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
+	export TERM=xterm-256color
 else
 	alias ls="ls -lat --color=auto"
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
+	else
+		export TERM=xterm-256color
 	fi
 fi
 # export PATH="$(brew --prefix php)/bin:$PATH"

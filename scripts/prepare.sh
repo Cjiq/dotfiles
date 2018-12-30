@@ -29,7 +29,11 @@ fi
 
 DIST=`echo $DISTRO | awk '{print $1}'`
 
-# if [ "$(id -u)" != "0" ]; then
-# 	echo "Sorry, you are not root."
-# 	exit 1
-# fi
+# Copy dotfiles to home folder if doesnt exist
+if [[ ! -d "$HOME/.dotfiles" ]]; then
+	echo ">> Moving dotfiles to home folder! <<"
+	oldDir="$(dirname $(pwd))"
+	mv $oldDir $HOME/.dotfiles
+	ln -s $HOME/.dotfiles $oldDir
+fi
+
