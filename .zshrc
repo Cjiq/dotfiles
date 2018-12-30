@@ -5,7 +5,8 @@
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bira"
+# ZSH_THEME="bira"
+ZSH_THEME="af-magic"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -84,4 +85,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Random comment
-alias ls="ls -lat --color=auto"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias ls="ls -latG"
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
+	export TERM=xterm-256color
+else
+	alias ls="ls -lat --color=auto"
+	if [[ $TERM == "xterm-termite" ]]; then
+		alias ssh="TERM='xterm-color' ssh"
+	else
+		export TERM=xterm-256color
+	fi
+fi
+# export PATH="$(brew --prefix php)/bin:$PATH"
