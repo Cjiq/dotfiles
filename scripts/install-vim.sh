@@ -51,29 +51,29 @@ esac
 done
 
 rm -rf ~/.vim
-mkdir -p ~/.vim/bundle/Vundle.vim
 
-# Clone vundle and install to default install location
-echo -e "Downloading vundle.."
-git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/temp-vundle > /dev/null
-mv ~/temp-vundle/* ~/temp-vundle/.[^.]* ~/.vim/bundle/Vundle.vim
-rm -rf ~/temp-vundle
 
 # Install dotvim
 echo -e "Downloading dotvim.."
-git clone --quiet https://github.com/Cjiq/dotvim.git ~/temp-dotfiles > /dev/null
-mv ~/temp-dotfiles/* ~/temp-dotfiles/.[^.]* ~/.vim
-rm -rf ~/temp-dotfiles
+git clone --quiet https://github.com/Cjiq/dotvim.git ~/.vim > /dev/null
+
+
+# Clone vundle and install to default install location
+echo -e "Downloading vundle.."
+mkdir -p ~/.vim/bundle/Vundle.vim
+git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/temp-vundle > /dev/null
+mv ~/temp-vundle/* ~/temp-vundle/.[^.]* ~/.vim/bundle/Vundle.vim
+rm -rf ~/temp-vundle
 
 # Run vundle plugin install
 echo -e "Installing vundle plugins. This could take some time.."
 vim +PluginInstall +qa
 
 # Use same vim settings for root as for user.
-sudo ln -sf /home/${USER}/.vim /.vim 
+sudo ln -sf $HOME/.vim /.vim 
 
 # Install patched fonts
-# If arch then install patched font.
+# If linux then install patched font.
 if [[ $DIST == "arch" ]]  ||  [[ "$OSTYPE" == "darwin"* ]] || [[ $DIST == "centos" ]]; then
 	echo -e "Downloading and patching fonts.."
 	git clone --quiet https://github.com/powerline/fonts/ ~/temp-p-fonts > /dev/null

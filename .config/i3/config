@@ -64,12 +64,12 @@ bindsym $mod+Shift+q	kill
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
-bindsym $mod+Shift+backspace	exec hutdown -h -r now
+bindsym $mod+Shift+backspace	exec shutdown -h -r now
 
 bindsym $mod+w			exec --no-startup-id $browser
 
 bindsym $mod+r			exec $term -e ranger
-bindsym $mod+d			exec rofi -show run
+bindsym $mod+d			exec rofi -theme Monokai -show run
 
 bindsym $mod+c			exec xclip -o -selection clipboard | xclip
 bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
@@ -124,13 +124,15 @@ set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 
+bindsym --release $mod+Shift+Return exec --no-startup-id "xdtool windowactivate $(xdotool search --onlyvisible --class chromium|head -1) && xdotool key F6"
+
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.
 # bindsym XF86AudioMute			exec $mute
 # bindsym XF86AudioLowerVolume	exec $dec
 # bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86MonBrightnessDown	exec --no-startup-id backlight-mod.sh -15
-bindsym XF86MonBrightnessUp	exec --no-startup-id backlight-mod.sh 15
+bindsym XF86MonBrightnessDown	exec --no-startup-id backlight-mod.sh -5
+bindsym XF86MonBrightnessUp	exec --no-startup-id backlight-mod.sh 5
 # Volume control
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%

@@ -23,7 +23,8 @@ if [ ! -d "~/.config/termite" ]; then
 	 mkdir -p ~/.config/termite
 fi
 
-cp -f "${BASH_SOURCE%/*}/../termite-config" ~/.config/termite/config
-# cp -f ../termite-config ~/.config/termite/config
+# Delete old config
+rm -rf ~/.config/termite/config
+ln -s "$HOME/.dotfiles/termite-config" ~/.config/termite/config
 
 echo -e "${Gre} All done! Have a nice day :)${RCol}"

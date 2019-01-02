@@ -29,6 +29,10 @@ fi
 
 DIST=`echo $DISTRO | awk '{print $1}'`
 
+if (( $EUID == 0 )); then
+    echo "Please do not run as root. Aborting."
+    exit
+fi
 # Copy dotfiles to home folder if doesnt exist
 if [[ ! -d "$HOME/.dotfiles" ]]; then
 	echo ">> Moving dotfiles to home folder! <<"

@@ -62,7 +62,7 @@ done
 export ZSH=$HOME/.oh-my-zsh
 pwd
 rm -rf ~/.zshrc
-ln -s "${BASH_SOURCE%/*}/../.zshrc" ~/.zshrc
+ln -s "$HOME/.dotfiles/.zshrc" ~/.zshrc
 
 echo -e "${Gre} All done! Have a nice day :)${RCol}"
 zsh
