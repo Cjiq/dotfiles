@@ -175,12 +175,9 @@ while true; do
                         MIRRORLIST=true
                         cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
-                        echo "Server = http://ftp.lysator.liu.se/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-                        echo "Server = http://archlinux.dynamict.se/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://ftp.acc.umu.se/mirror/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirror.neuf.no/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirrors.atviras.lt/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = https://archlinux.dynamict.se/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = https://ftp.acc.umu.se/mirror/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        
                         pacman -Syyu
                         break;;
                     [Nn]* )
