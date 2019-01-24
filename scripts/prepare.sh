@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Init some default colors and stuff
 RCol='\e[0m'    # Text Reset

@@ -33,14 +33,24 @@ wget https://raw.githubusercontent.com/Cjiq/dotfiles/master/scripts/arch-chroot-
 echo -e -n "${Cya}Which /dev/sdx do you which to use?${RCol} (Default /dev/sda)${cr}Use:" 
 
 # Prompt user for correct harddrive
-read -e -p " " -i "/dev/sda" input
+read -e -p " " input
+input=${input:-/dev/sda}
 INSTALL_DRIVE=$input
 
+echo -e -n "${Cya}Which /dev/sda{x} number do you wish to start at?${RCol} (Default /dev/sda2)${cr}Use:" 
+
+# Prompt user for correct sda number
+read -e -p " " SDA_NUMBER
+SDA_NUMBER=${SDA_NUMBER:-2}
+
 # Set default partition setup
-BOOT_PARTITION=${INSTALL_DRIVE}2
-ROOT_PARTITION=${INSTALL_DRIVE}3
-SWAP_PARTITION=${INSTALL_DRIVE}4
-HOME_PARTITION=${INSTALL_DRIVE}5
+BOOT_PARTITION=${INSTALL_DRIVE}${SDA_NUMBER}
+SDA_NUMBER=$((SDA_NUMBER+1))
+ROOT_PARTITION=${INSTALL_DRIVE}${SDA_NUMBER}
+SDA_NUMBER=$((SDA_NUMBER+1))
+SWAP_PARTITION=${INSTALL_DRIVE}${SDA_NUMBER}
+SDA_NUMBER=$((SDA_NUMBER+1))
+HOME_PARTITION=${INSTALL_DRIVE}${SDA_NUMBER}
 
 # Start gdisk with chosen harddrive
 echo -e "${Cya}Starting gdisk with ${Gre}$INSTALL_DRIVE${Cya} for manual partitioning${RCol}"
@@ -165,12 +175,9 @@ while true; do
                         MIRRORLIST=true
                         cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
-                        echo "Server = http://ftp.lysator.liu.se/pub/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-                        echo "Server = http://archlinux.dynamict.se/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://ftp.acc.umu.se/mirror/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirror.neuf.no/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
-                        echo "Server = http://mirrors.atviras.lt/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = https://archlinux.dynamict.se/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        echo "Server = https://ftp.acc.umu.se/mirror/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+                        
                         pacman -Syyu
                         break;;
                     [Nn]* )
@@ -187,7 +194,7 @@ while true; do
 done
 echo -e -n "${Cya}Downloading and Installing system! ${Gre}:D${RCol}${cr}" 
 pacstrap /mnt base base-devel
-arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh vim
+arch-chroot /mnt pacman -S --noconfirm grub-bios syslinux sudo openssh vim dialog wpa_supplicant
 genfstab -p /mnt >> /mnt/etc/fstab
 # # Create initial ramdisk environment
 arch-chroot /mnt mkinitcpio -p linux
