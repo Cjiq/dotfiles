@@ -1,0 +1,11 @@
+ERR=$((sp current 2>&1) | grep -E "Error|.service" | wc -l)
+if [ $ERR != 0 ]; then
+	echo "Failed to read current song"
+	return
+fi
+TITLE=`sp current | grep -w 'Title' | sed -e 's/^\w*\ *//'`
+ARTIST=`sp current | grep -w 'Artist' | sed -e 's/^\w*\ *//'`
+#echo $ARTIST - $TITLE
+if [ ! -z "$TITLE" -a "$TITLE" != " " ]; then
+	echo $TITLE - $ARTIST
+fi
