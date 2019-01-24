@@ -10,7 +10,7 @@ gaps inner 10
 gaps outer 2
 font pango:monospace 12
 
-set $mod Mod4
+set $mod Mod1
 set $term termite
 set $browser chromium
 
@@ -20,13 +20,13 @@ focus_follows_mouse no
 # client.focused				#1049A9 #1049A9 #104919 #1049A9
 
 #Launch polybar
-exec_always --no-startup-id set-resolution
-exec --no-startup-id spotify
-exec_always --no-startup-id xcompmgr &
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id nm-applet
+ # exec_always --no-startup-id set-resolution
+ # exec --no-startup-id spotify
+ # exec_always --no-startup-id xcompmgr &
+ exec_always --no-startup-id ~/.config/polybar/launch.sh
+# exec_always --no-startup-id nm-applet
 #Add wallpaper:
-exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
+# exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
 
 ###---Useful scripts---###
 #Mini math buffer
