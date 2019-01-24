@@ -1,0 +1,4 @@
+#!/bin/bash
+xrandr --newmode "1920x1200" 192.83 1920 2048 2256 2592 1200 1201 1204 1242 -HSync +V
+xrandr --addmode eDP-1 1920x1200
+xrandr --output eDP-1 --mode 1920x1200

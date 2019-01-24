@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+octave -q --persist --eval 'clc; PS1 ("> ")'
