@@ -4,24 +4,25 @@
 source ../scripts/prepare.sh
 
 disp "Moving scripts.."
-# cp scripts/spotify-current /usr/local/bin/
-# cp scripts/sp /usr/local/bin/
-# cp scripts/octave_math /usr/local/bin/
-# cp scripts/set-resolution /usr/local/bin/
+disp "This action requires sudo."
+sudo cp scripts/spotify-current /usr/local/bin/
+sudo cp scripts/sp /usr/local/bin/
+sudo cp scripts/octave_math /usr/local/bin/
+sudo cp scripts/set-resolution /usr/local/bin/
 
 
 disp "Syncing pacman.."
-# sudo pacman -Sy
+sudo pacman -Sy
 disp "Installing pacman dependencies.."
-# cat pac.dep | paste -sd " " | xargs sudo pacman -S --noconfirm
+cat pac.dep | paste -sd " " | xargs sudo pacman -S --noconfirm
 disp "Installing yay..."
-# git clone https://aur.archlinux.org/yay.git
-# cd yay
-# makepkg -si
-# cd ..
-# rm -rf yay
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd ..
+rm -rf yay
 disp "Installing yay dependencies.."
-# cat yay.dep | paste -sd " " | xargs yay -S --noconfirm
+cat yay.dep | paste -sd " " | xargs yay -S --noconfirm
 
 IS_MANJARO=false
 while true; do
@@ -37,6 +38,7 @@ while true; do
 done
 
 #Remove old i3 gen script
+disp "Create config generator script"
 rm -rf gen_i3_config
 cat gen/main > gen_i3_config
 if $IS_MANJARO; then
@@ -49,4 +51,9 @@ else
 fi
 cat gen/end >> gen_i3_config
 chmod +x gen_i3_config
-disp "Done! Have a nice day :)"
+disp "Run the script.."
+source gen_i3_config
+disp "Making alias to run config gen.."
+sudo ln -sf ~/.dotfiles/i3-gaps/gen_i3_config /usr/local/bin/i3-config-gen
+disp "Use ${Cya}i3-config-gen${Gre} to refresh the config file.."
+disp "i3 gaps installation is now complete"

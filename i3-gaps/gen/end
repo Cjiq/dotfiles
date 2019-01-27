@@ -1,2 +1,3 @@
 disp "Making the config file read only.."
 chmod 0444 $I3_CONFIG
+disp "All done! Have a nice day."
