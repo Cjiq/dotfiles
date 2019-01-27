@@ -23,7 +23,7 @@ focus_follows_mouse no
  # exec --no-startup-id spotify
  # exec_always --no-startup-id xcompmgr &
 #Add wallpaper:
-# exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
+ exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
 
 ###---Useful scripts---###
 #Mini math buffer
