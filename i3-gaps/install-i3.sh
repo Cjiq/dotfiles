@@ -10,6 +10,19 @@ sudo cp scripts/sp /usr/local/bin/
 sudo cp scripts/octave_math /usr/local/bin/
 sudo cp scripts/set-resolution /usr/local/bin/
 
+disp "Fixing backlighting.."
+disp "Pick your system (1-3):"
+echo " 1) VirtualBox"
+echo " 2) Lenovo"
+echo " 3) Macbook"
+echo -n "> "
+read SYS
+case $SYS in
+	1);;
+	2)	sudo cp scripts/backlight_mod_lenovo /usr/local/bin/backlight_mod ;;
+	3)	sudo cp scripts/backlight_mod_mac /usr/local/bin/backlight_mod ;; 
+esac
+sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
 
 disp "Syncing pacman.."
 sudo pacman -Sy

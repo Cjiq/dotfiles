@@ -3,6 +3,7 @@
 source ~/.dotfiles/scripts/prepare.sh
 
 I3_CONFIG=~/.i3/config
+mkdir ~/.i3
 
 rm -rf $I3_CONFIG
 disp "Generating new i3 gaps config file.."
