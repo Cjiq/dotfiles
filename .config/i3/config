@@ -52,7 +52,8 @@ set $mute --no-startup-id pamixer --allow-boost -t
 
 for_window [class="^Spotify$"] move container to workspace $ws3
 #Make all windows transparet
-for_window [class="^(.*?)$"] exec transset-df -a 0.96
+# for_window [class="^(.*?)$"] exec transset-df -a 0.94
+for_window [class="^Termite$"] exec transset-df -a 0.97
 
 ###---Keybindings---###
 bindsym $mod+Return		exec --no-startup-id $term

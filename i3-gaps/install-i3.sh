@@ -9,6 +9,8 @@ sudo cp scripts/spotify-current /usr/local/bin/
 sudo cp scripts/sp /usr/local/bin/
 sudo cp scripts/octave_math /usr/local/bin/
 sudo cp scripts/set-resolution /usr/local/bin/
+sudo cp scripts/i3-reload /usr/local/bin/
+sudo cp scripts/i3-restart /usr/local/bin/
 
 disp "Fixing backlighting.."
 disp "Pick your system (1-3):"
@@ -68,5 +70,7 @@ disp "Run the script.."
 source gen_i3_config
 disp "Making alias to run config gen.."
 sudo ln -sf ~/.dotfiles/i3-gaps/gen_i3_config /usr/local/bin/i3-config-gen
-disp "Use ${Cya}i3-config-gen${Gre} to refresh the config file.."
+disp "Use ${Cya}i3-config-gen${Gre} to re-generate the config file.."
+disp "Use ${Cya}i3-reload${Gre} to reload the config file.."
+disp "Use ${Cya}i3-restart${Gre} to restart the i3 enviroment.."
 disp "i3 gaps installation is now complete"
