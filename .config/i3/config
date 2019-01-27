@@ -20,11 +20,11 @@ focus_follows_mouse no
 # client.focused				#1049A9 #1049A9 #104919 #1049A9
 
 #Launch polybar
- # exec_always --no-startup-id set-resolution
- # exec --no-startup-id spotify
+exec_always --no-startup-id set-resolution
+exec --no-startup-id spotify
  # exec_always --no-startup-id xcompmgr &
- exec_always --no-startup-id ~/.config/polybar/launch.sh
-# exec_always --no-startup-id nm-applet
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id nm-applet
 #Add wallpaper:
 # exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
 
@@ -131,8 +131,8 @@ bindsym --release $mod+Shift+Return exec --no-startup-id chromium-focus
 # bindsym XF86AudioMute			exec $mute
 # bindsym XF86AudioLowerVolume	exec $dec
 # bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86MonBrightnessDown	exec --no-startup-id backlight-mod.sh -5
-bindsym XF86MonBrightnessUp	exec --no-startup-id backlight-mod.sh 5
+bindsym XF86MonBrightnessDown	exec --no-startup-id backlight_mod -5
+bindsym XF86MonBrightnessUp	exec --no-startup-id backlight_mod 5
 # Volume control
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%

@@ -120,7 +120,7 @@ tray-position = left
 [module/brightness]
 type = custom/script
 interval = 2
-exec = backlight-mod.sh
+exec = backlight_mod
 format-prefix = "☼: "
 tray-position = right
 
