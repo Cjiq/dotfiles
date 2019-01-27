@@ -19,14 +19,12 @@ focus_follows_mouse no
 # client.unfocused			#1049A9 #104919 #104919 #1049A9
 # client.focused				#1049A9 #1049A9 #104919 #1049A9
 
-#Launch polybar
 exec_always --no-startup-id set-resolution
 exec --no-startup-id spotify
- # exec_always --no-startup-id xcompmgr &
-exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id nm-applet
+exec_always --no-startup-id xcompmgr &
 #Add wallpaper:
-# exec_always --no-startup-id feh --bg-scale ls ~/.config/bgs | sort -R | tail -1
+exec_always --no-startup-id feh --bg-scale ls ~/.dotfiles/bgs | sort -R | tail -1
 
 ###---Useful scripts---###
 #Mini math buffer
