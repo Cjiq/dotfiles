@@ -1,0 +1,1 @@
+cat -s ~/.dotfiles/.config/i3/config.polybar >> $I3_CONFIG

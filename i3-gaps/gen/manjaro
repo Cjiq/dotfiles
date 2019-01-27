@@ -1,0 +1,2 @@
+
+cat -s ~/.dotfiles/.config/i3/config.manjaro >> $I3_CONFIG
