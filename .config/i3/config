@@ -16,12 +16,8 @@ set $browser chromium
 
 focus_follows_mouse no
 
-# client.unfocused			#1049A9 #104919 #104919 #1049A9
-# client.focused				#1049A9 #1049A9 #104919 #1049A9
-
 exec_always --no-startup-id set-resolution
 exec --no-startup-id spotify
-exec_always --no-startup-id nm-applet
 exec_always --no-startup-id xcompmgr &
 #Add wallpaper:
 exec_always --no-startup-id feh --bg-scale ls ~/.dotfiles/bgs | sort -R | tail -1
@@ -75,8 +71,6 @@ bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
 
 bindsym $mod+f 			fullscreen toggle
 
-# bindsym $mod+a exec $terminal --name math_float; exec "bash -c 'sleep 0.2s;i3-msg floating enable;i3-msg resize set 400px 100px;i3-msg move position 940px 630px'"
-
 bindsym $mod+a			[class="math" instance="math"] scratchpad show; move position center
 bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
 
@@ -129,8 +123,6 @@ set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-
-bindsym --release $mod+Shift+Return exec --no-startup-id chromium-focus
 
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.
