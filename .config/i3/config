@@ -95,7 +95,7 @@ bindsym $mod+Shift+l 	move right 30
 bindsym $mod+minus		split vertical ;; exec $term
 bindsym $mod+period		split horizontal ;; exec $term
 
-bindsym $mod+Ctrl+l		resize grow width 5px or 5pt
+bindsym $mod+Ctrl+l		exec --no-startup-id blurlock
 bindsym $mod+Ctrl+h		resize shirnk width 5px or 5pt
 
 bindsym $mod+Ctrl+k		resize grow height 5px or 5pt

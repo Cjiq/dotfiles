@@ -1,0 +1,36 @@
+#!/bin/sh
+
+O='#fd971fff'  # orange
+R='#f92672cc'  # red
+B='#272822ff'  # darkgray
+G='#a6e22eff'  # green
+L='#3e3d32ff'  # lightgray
+LL='#75715eff'  # lightlightgray
+
+i3lock \
+--insidevercolor=$B   \
+--ringvercolor=$LL     \
+\
+--insidewrongcolor=$B \
+--ringwrongcolor=$O   \
+\
+--insidecolor=$B      \
+--ringcolor=$L        \
+--linecolor=$B        \
+--separatorcolor=$LL   \
+\
+--verifcolor=$R        \
+--wrongcolor=$R        \
+--timecolor=$R        \
+--datecolor=$R        \
+--layoutcolor=$R      \
+--keyhlcolor=$LL       \
+--bshlcolor=$B        \
+\
+--screen 2            \
+--blur 9              \
+--clock               \
+--indicator           \
+--timestr="%H:%M:%S"  \
+--datestr="%A, %m %Y" \
+--keylayout 2         \

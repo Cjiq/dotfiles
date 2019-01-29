@@ -11,6 +11,7 @@ sudo cp scripts/octave_math /usr/local/bin/
 sudo cp scripts/set-resolution /usr/local/bin/
 sudo cp scripts/i3-reload /usr/local/bin/
 sudo cp scripts/i3-restart /usr/local/bin/
+sudo cp scripts/blurlock /usr/local/bin/
 
 disp "Fixing backlighting.."
 disp "Pick your system (1-3):"

@@ -3,4 +3,4 @@
 
 #Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id nm-applet
+exec --no-starup-id xautolock -time 10 -locker blurlock
