@@ -99,7 +99,6 @@ else
 	fi
 fi
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  xrandr --output eDP1 --mode 1920x1080 --output DP1-1 --mode 1920x1200 --right-of eDP1 --output DP1-2 --mode 1920x1200 --right-of DP1-1
   exec startx
 fi
 # export PATH="$(brew --prefix php)/bin:$PATH"

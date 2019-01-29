@@ -1,0 +1,45 @@
+#!/bin/bash
+
+args=("$@")
+report=${args[1]}
+dest=${args[2]}
+function help()  {
+	echo " Help: "
+	echo "  texplate list				List available templates"
+	echo "  texplate copy <template> <new-name>	Copy given template name to new location"
+}
+
+function list() {
+	echo "Available templates:"
+	ls ~/.latex/templates
+}
+
+function copy() {
+	if [[ $report = "" ]]; then
+		echo "You have to pick a template."
+		echo ""
+		help
+		exit
+	fi
+	if [[ $dest = "" ]]; then
+		echo "You have to pick a destination."
+		echo ""
+		help
+		exit
+	fi
+	if cp -a "$HOME/.latex/templates/$report" "$dest"; then
+		echo "Template $report copied to: $dest"
+	else
+		echo "Failed to copy template"
+	fi
+}
+
+echo "LaTex templater v1.0"
+echo ""
+case $1 in
+	help*) help;;
+	list*) list;;
+	copy*) copy;;
+	""*) help;;
+	*) echo "Unknown command."; help;;
+esac

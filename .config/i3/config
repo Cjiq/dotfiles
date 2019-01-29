@@ -17,6 +17,7 @@ set $browser chromium
 focus_follows_mouse no
 
 exec_always --no-startup-id set-resolution
+exec --no-startup-id killall -q spotify
 exec --no-startup-id spotify
 exec_always --no-startup-id xcompmgr &
 #Add wallpaper:
@@ -140,4 +141,5 @@ bindsym XF86MonBrightnessUp	exec --no-startup-id backlight_mod 5
 bindsym XF86AudioPlay exec sp play
 bindsym XF86AudioNext exec sp next
 bindsym XF86AudioPrev exec sp prev
+
 
