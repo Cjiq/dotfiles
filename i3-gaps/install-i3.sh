@@ -59,10 +59,12 @@ cat gen/main > gen_i3_config
 if $IS_MANJARO; then
 	disp "Adding config section for manjaro.."
 	cat gen/manjaro >> gen_i3_config
+	sudo ln -sf ~/.dotfiles/.config/i3/config.manjaro ~/.i3-config-manjaro
 else
 	disp "Adding config section for polybar.."
 	yay -S --noconfirm polybar
 	cat gen/polybar >> gen_i3_config
+	sudo ln -sf ~/.dotfiles/.config/i3/config.polybar ~/.i3-config-polybar
 fi
 cat gen/end >> gen_i3_config
 chmod +x gen_i3_config
