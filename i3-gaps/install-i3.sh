@@ -70,6 +70,7 @@ disp "Run the script.."
 source gen_i3_config
 disp "Making alias to run config gen.."
 sudo ln -sf ~/.dotfiles/i3-gaps/gen_i3_config /usr/local/bin/i3-config-gen
+sudo ln -sf ~/.dotfiles/.config/i3/config ~/.i3-config
 disp "Use ${Cya}i3-config-gen${Gre} to re-generate the config file.."
 disp "Use ${Cya}i3-reload${Gre} to reload the config file.."
 disp "Use ${Cya}i3-restart${Gre} to restart the i3 enviroment.."

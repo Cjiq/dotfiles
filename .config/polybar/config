@@ -21,7 +21,7 @@ col = #00f
 [bar/cjiq]
 ;monitor = ${env:MONITOR:HDMI-1}
 ;monitor = ${env:MONITOR}
-monitor = ${env:MONITOR:eDP1}
+monitor = ${env:MONITOR:}
 width = 100%
 height = 24
 ;offset-x = 1%
@@ -50,7 +50,7 @@ font-2 = siji:pixelsize=11;1
 font-3 = mono:pixelsize=17;1
 font-4 = "Roboto:size=16:weight=bold;2"
 
-modules-left = i3 spotify
+modules-left = i3 ewmh spotify
 ; modules-center = 
 modules-right = brightness volume filesystem memory wlan eth battery temperature date powermenu
 
@@ -176,6 +176,13 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %index%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+label-monitor = %name%
+format = <label-sate>
+label-urgent = ACTIVE %name%
 
 [module/mpd]
 type = internal/mpd

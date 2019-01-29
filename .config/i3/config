@@ -37,20 +37,20 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 
 #FOR ALSA/AMIXER
-# set $inc --no-startup-id amixer sset Master 2%+
-# set $biginc --no-startup-id amixer sset Master 5%+
-# set $dec --no-startup-id amixer sset Master 2%-
-# set $bigdec --no-startup-id amixer sset Master 5%-
-# set $mute --no-startup-id amixer sset Master toggle
+set $inc --no-startup-id amixer sset Master 2%+
+set $biginc --no-startup-id amixer sset Master 5%+
+set $dec --no-startup-id amixer sset Master 2%-
+set $bigdec --no-startup-id amixer sset Master 5%-
+set $mute --no-startup-id amixer sset Master toggle
 
 #For PULSEAUDIO/PAMIXER
-set $inc --no-startup-id pamixer --allow-boost -i 5
-set $biginc --no-startup-id pamixer --allow-boost -i 15
-set $dec --no-startup-id pamixer --allow-boost -d 5
-set $bigdec --no-startup-id pamixer --allow-boost -d 15
-set $mute --no-startup-id pamixer --allow-boost -t
+# set $inc --no-startup-id pamixer --allow-boost -i 5
+# set $biginc --no-startup-id pamixer --allow-boost -i 15
+# set $dec --no-startup-id pamixer --allow-boost -d 5
+# set $bigdec --no-startup-id pamixer --allow-boost -d 15
+# set $mute --no-startup-id pamixer --allow-boost -t
 
-for_window [class="^Spotify$"] move container to workspace $ws3
+for_window [class="^Spotify$"] move container to workspace $ws7
 #Make all windows transparet
 # for_window [class="^(.*?)$"] exec transset-df -a 0.94
 for_window [class="^Termite$"] exec transset-df -a 0.97
@@ -116,26 +116,33 @@ bindsym $mod+Shift+4	move container to workspace $ws4
 bindsym $mod+5			workspace $ws5
 bindsym $mod+Shift+5	move container to workspace $ws5
 
+bindsym $mod+6			workspace $ws6
+bindsym $mod+Shift+6	move container to workspace $ws6
+
+bindsym $mod+7			workspace $ws7
+bindsym $mod+Shift+7	move container to workspace $ws7
 
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
 
 bindsym --release $mod+Shift+Return exec --no-startup-id chromium-focus
 
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.
-# bindsym XF86AudioMute			exec $mute
-# bindsym XF86AudioLowerVolume	exec $dec
-# bindsym XF86AudioRaiseVolume	exec $inc
+bindsym XF86AudioMute			exec $mute
+bindsym XF86AudioLowerVolume	exec $dec
+bindsym XF86AudioRaiseVolume	exec $inc
 bindsym XF86MonBrightnessDown	exec --no-startup-id backlight_mod -5
 bindsym XF86MonBrightnessUp	exec --no-startup-id backlight_mod 5
 # Volume control
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+# bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 # Play/Pause, change songs
 bindsym XF86AudioPlay exec sp play

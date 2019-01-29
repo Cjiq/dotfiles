@@ -98,4 +98,7 @@ else
 		export TERM=xterm-256color
 	fi
 fi
+if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  exec startx
+fi
 # export PATH="$(brew --prefix php)/bin:$PATH"
