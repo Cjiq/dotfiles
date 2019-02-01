@@ -3,12 +3,14 @@
 ###---Basic Definitions---###
 #Needed for i3-gaps
 hide_edge_borders both
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
+client.focused	#fd971f #fd971f #fd971f #fd971f
 # gaps inner 18
 # gaps outer 2
 gaps inner 10
 gaps outer 2
-font pango:monospace 12
+#font pango:monospace 12
+font pango:Sans 12
 
 set $mod Mod1
 set $term termite
@@ -16,7 +18,6 @@ set $browser chromium
 
 focus_follows_mouse no
 
-exec_always --no-startup-id set-resolution
 exec --no-startup-id killall -q spotify
 exec --no-startup-id spotify
 exec_always --no-startup-id xcompmgr &
@@ -32,6 +33,13 @@ for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move position center
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
+
+exec termite --class="trans" --name="trans" -e "trans :sv -I"
+for_window [instance="trans"] floating enable
+for_window [instance="trans"] resize set 800 300
+for_window [instance="trans"] move position center
+for_window [instance="trans"] move scratchpad
+for_window [instance="trans"] border pixel 1
 
 #FOR ALSA/AMIXER
 set $inc --no-startup-id amixer sset Master 2%+
@@ -73,6 +81,7 @@ bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
 bindsym $mod+f 			fullscreen toggle
 
 bindsym $mod+a			[class="math" instance="math"] scratchpad show; move position center
+bindsym $mod+t			[class="trans" instance="trans"] scratchpad show; move position center
 bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
 
 bindsym $mod+h 			focus left
@@ -91,6 +100,8 @@ bindsym $mod+minus		split vertical ;; exec $term
 bindsym $mod+period		split horizontal ;; exec $term
 
 bindsym $mod+Ctrl+l		exec --no-startup-id blurlock
+bindsym $mod+Ctrl+s		exec --no-startup-id sus
+
 bindsym $mod+Ctrl+h		resize shirnk width 5px or 5pt
 
 bindsym $mod+Ctrl+k		resize grow height 5px or 5pt
@@ -117,6 +128,10 @@ bindsym $mod+Shift+6	move container to workspace $ws6
 bindsym $mod+7			workspace $ws7
 bindsym $mod+Shift+7	move container to workspace $ws7
 
+bindsym $mod+Ctrl+b		exec --no-startup-id sp play
+bindsym $mod+Ctrl+n		exec --no-startup-id sp prev
+bindsym $mod+Ctrl+m		exec --no-startup-id sp next
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -142,4 +157,5 @@ bindsym XF86AudioPlay exec sp play
 bindsym XF86AudioNext exec sp next
 bindsym XF86AudioPrev exec sp prev
 
+exec --no-startup-id after-login
 

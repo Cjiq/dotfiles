@@ -241,7 +241,7 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "Mem: "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -288,12 +288,12 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 date = " %a, %b %d, %Y"
 ;date-alt = " %a, %b %d, %Y at %I:%M%p"
 ;date-alt = " %Y-%m-%d"
 
-time = " at %I:%M%p"
+time = " at %H:%M:%S"
 ;time-alt = %H:%M:%S
 ;time-alt = %H:%M:%S
 
@@ -351,6 +351,7 @@ label-discharing = %percentage% %time%
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
+format-full = "Battery full"
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
