@@ -1,0 +1,27 @@
+#!/bin/bash
+
+type git >/dev/null 2>&1 || { echo >&2 "git is not installed. Aborting."; exit 1; }
+type make >/dev/null 2>&1 || { echo >&2 "make is not installed. Aborting."; exit 1; }
+
+WDIR=`mktemp -d`
+
+# check if tmp dir was created
+if [[ ! "$WDIR" || ! -d "$WDIR" ]]; then
+  echo "Could not create temp dir"
+  exit 1
+fi
+
+function cleanup {
+	rm -rf $WDIR
+	echo "Removed temp dir: $WDIR"
+} 
+
+trap cleanup EXIT
+
+cd $WDIR
+git clone https://github.com/schischi/xcwd
+cd xcwd
+make
+echo "Installing xcwd.."
+sudo make install
+echo "Done :)"

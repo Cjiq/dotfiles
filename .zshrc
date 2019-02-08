@@ -92,6 +92,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	export TERM=xterm-256color
 else
 	alias ls="ls -lat --color=auto"
+	alias svi="sudo vim"
+	alias vi="vim"
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	else
