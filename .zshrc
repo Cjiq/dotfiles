@@ -94,6 +94,7 @@ else
 	alias ls="ls -lat --color=auto"
 	alias svi="sudo vim"
 	alias vi="vim"
+	alias mp="modpoll"
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	else

@@ -20,7 +20,7 @@ focus_follows_mouse no
 
 exec_always --no-startup-id xcompmgr &
 #Add wallpaper:
-exec_always --no-startup-id feh --bg-scale ls ~/.dotfiles/bgs | sort -R | tail -1
+exec_always --no-startup-id feh --bg-scale --randomize ~/.dotfiles/bgs/*.jpg
 
 ###---Useful scripts---###
 #Mini math buffer
@@ -163,4 +163,4 @@ bindsym XF86AudioPrev exec sp prev
 
 exec --no-startup-id after-login
 exec --no-startup-id killall -q spotify
-exec --no-startup-id spotify
+exec --no-startup-id sleep 1; exec --no-startup-id spotify
