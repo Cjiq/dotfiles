@@ -34,7 +34,7 @@ sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
 disp "Syncing pacman.."
 sudo pacman -Sy
 disp "Installing pacman dependencies.."
-cat pac.dep | paste -sd " " | xargs sudo pacman -S --noconfirm
+cat pac.dep | paste -sd " " | xargs sudo pacman -S --noconfirm --needed
 disp "Installing yay..."
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -42,7 +42,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay
 disp "Installing yay dependencies.."
-cat yay.dep | paste -sd " " | xargs yay -S --noconfirm
+cat yay.dep | paste -sd " " | xargs yay -S --noconfirm --needed
 
 IS_MANJARO=false
 while true; do
