@@ -22,12 +22,14 @@ disp "Pick your system (1-3):"
 echo " 1) VirtualBox"
 echo " 2) Lenovo"
 echo " 3) Macbook"
+echo " 4) Dell Vostro"
 echo -n "> "
 read SYS
 case $SYS in
 	1);;
 	2)	sudo cp scripts/backlight_mod_lenovo /usr/local/bin/backlight_mod ;;
 	3)	sudo cp scripts/backlight_mod_mac /usr/local/bin/backlight_mod ;; 
+	4)	sudo cp scripts/backlight_mod_dellv /usr/local/bin/backlight_mod ;; 
 esac
 sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
 
@@ -70,6 +72,7 @@ else
 	yay -S --noconfirm polybar
 	cat gen/polybar >> gen_i3_config
 	sudo ln -sf ~/.dotfiles/.config/i3/config.polybar ~/.i3-config-polybar
+	ln -sf ~/.dotfiles/.config/polybar ~/.config/polybar
 fi
 cat gen/end >> gen_i3_config
 chmod +x gen_i3_config

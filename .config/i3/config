@@ -14,7 +14,7 @@ font pango:monospace 12
 
 set $mod Mod1
 set $term termite
-set $browser chromium
+set $browser brave
 
 focus_follows_mouse no
 

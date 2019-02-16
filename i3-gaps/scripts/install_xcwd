@@ -3,6 +3,7 @@
 type git >/dev/null 2>&1 || { echo >&2 "git is not installed. Aborting."; exit 1; }
 type make >/dev/null 2>&1 || { echo >&2 "make is not installed. Aborting."; exit 1; }
 
+OLD_DIR=$(pwd)
 WDIR=`mktemp -d`
 
 # check if tmp dir was created
@@ -24,4 +25,6 @@ cd xcwd
 make
 echo "Installing xcwd.."
 sudo make install
+cd $OLD_DIR
+echo $(pwd)
 echo "Done :)"
