@@ -151,6 +151,9 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 
+bindsym $mod+F5			exec --no-startup-id i3-restart
+bindsym $mod+Shift+F5	exec --no-startup-id i3-reload
+
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute			exec $mute
