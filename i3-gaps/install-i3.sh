@@ -44,6 +44,10 @@ rm -rf yay
 disp "Installing yay dependencies.."
 cat yay.dep | paste -sd " " | xargs yay -S --noconfirm
 
+# Enable ly as the login manager :)
+sudo systemctl enable ly.service
+sudo systemctl disable getty@tty2.service
+
 IS_MANJARO=false
 while true; do
 	echo -e -n "${Gre}Are you running Manjaro? (Y/n): ${RCol}" 

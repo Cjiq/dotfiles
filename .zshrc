@@ -85,16 +85,23 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Random comment
+
+# Golang :)
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Other stuff
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls="ls -latG"
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
 	export TERM=xterm-256color
 else
-	alias ls="ls -lat --color=auto"
+	alias ls="ls -lt --color=auto"
 	alias svi="sudo vim"
 	alias vi="vim"
 	alias mp="modpoll"
+	alias lsm="ls -lat | more"
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	else

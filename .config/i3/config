@@ -7,14 +7,16 @@ for_window [class="^.*"] border pixel 2
 client.focused	#fd971f #fd971f #fd971f #fd971f
 # gaps inner 18
 # gaps outer 2
-gaps inner 10
+gaps inner 5
 gaps outer 2
 font pango:monospace 12
 #font pango:Sans 12
 
 set $mod Mod1
 set $term termite
-set $browser chromium
+set $browser brave
+set $mail	"https://mail.ri.se/owa/#path=/mail"
+set $calendar "https://mail.ri.se/owa/#path=/calendar/view/Month"
 
 focus_follows_mouse no
 
@@ -34,7 +36,7 @@ for_window [instance="math"] border pixel 1
 
 exec termite --class="trans" --name="trans" -e "trans :sv -I"
 for_window [instance="trans"] floating enable
-for_window [instance="trans"] resize set 800 300
+for_window [instance="trans"] resize set 800 600
 for_window [instance="trans"] move position center
 for_window [instance="trans"] move scratchpad
 for_window [instance="trans"] border pixel 1
@@ -83,7 +85,7 @@ bindsym $mod+a			[class="math" instance="math"] scratchpad show; move position c
 bindsym $mod+t			[class="trans" instance="trans"] scratchpad show; move position center
 bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
 
-bindsym $mod+Shift+c	exec --no-startup-id $browser --app=https://calendar.google.com/calendar/r?pli=1
+bindsym $mod+Shift+c	exec --no-startup-id $browser --app=$calendar
 
 bindsym $mod+h 			focus left
 bindsym $mod+Shift+h 	move left 30
@@ -132,9 +134,14 @@ bindsym $mod+Shift+6	move container to workspace $ws6
 bindsym $mod+7			workspace $ws7
 bindsym $mod+Shift+7	move container to workspace $ws7
 
+bindsym $mod+Shift+w+h	move workspace to output left
+bindsym $mod+Shift+w+l	move workspace to output right
+
 bindsym $mod+Ctrl+b		exec --no-startup-id sp play
 bindsym $mod+Ctrl+n		exec --no-startup-id sp prev
 bindsym $mod+Ctrl+m		exec --no-startup-id sp next
+
+bindsym $mod+p			workspace back_and_forth
 
 set $ws1 "1"
 set $ws2 "2"
