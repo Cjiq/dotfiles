@@ -64,7 +64,7 @@ while true; do
 done
 
 # Set keyboard layout
-setxkbmap -model pc104 -layout se 
+sudo localectl --no-convert set-x11-keymap se pc104
 
 #Remove old i3 gen script
 disp "Create config generator script"
