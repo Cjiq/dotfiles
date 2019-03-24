@@ -63,6 +63,9 @@ while true; do
   esac
 done
 
+# Set keyboard layout
+setxkbmap -model pc104 -layout se 
+
 #Remove old i3 gen script
 disp "Create config generator script"
 rm -rf gen_i3_config

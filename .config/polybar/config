@@ -1,11 +1,3 @@
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
-
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #000
@@ -20,8 +12,8 @@ col = #00f
 
 [bar/cjiq]
 ;monitor = ${env:MONITOR:HDMI-1}
-monitor = ${env:MONITOR}
-;monitor = ${env:MONITOR:}
+;monitor = ${env:MONITOR}
+monitor = ${env:MONITOR:eDP1}
 width = 100%
 height = 24
 ;offset-x = 1%
@@ -42,7 +34,7 @@ padding-left = 0
 padding-right = 0
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
 font-0 = mono:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
@@ -50,7 +42,7 @@ font-2 = siji:pixelsize=11;1
 font-3 = mono:pixelsize=17;1
 font-4 = "Roboto:size=16:weight=bold;2"
 
-modules-left = i3 ewmh spotify
+modules-left = i3 
 ; modules-center = 
 modules-right = brightness volume filesystem memory wlan eth battery temperature date powermenu
 
@@ -150,7 +142,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
