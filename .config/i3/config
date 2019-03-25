@@ -21,25 +21,36 @@ set $calendar "https://mail.ri.se/owa/#path=/calendar/view/Month"
 focus_follows_mouse no
 
 exec_always --no-startup-id xcompmgr &
-#Add wallpaper:
 exec_always --no-startup-id feh --bg-scale --randomize ~/.dotfiles/bgs/*.jpg
+exec_always --no-startup-id nm-applet
 
 ###---Useful scripts---###
 #Mini math buffer
 #I'll later bind this to mod+a.
-exec termite -c "$HOME/.config/termite/config-math" --class="math" --name="math" -e "octave_math"
+# exec termite -c "$HOME/.config/termite/config-math" --class="math" --name="math" -e "octave_math"
+exec_always town math "octave_math"
+
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move position center
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 
-exec termite --class="trans" --name="trans" -e "trans :sv -I"
+# exec termite --class="trans" --name="trans" -e "trans :sv -I"
+exec_always town trans "trans :sv -I"
 for_window [instance="trans"] floating enable
 for_window [instance="trans"] resize set 800 600
 for_window [instance="trans"] move position center
 for_window [instance="trans"] move scratchpad
 for_window [instance="trans"] border pixel 1
+
+# exec termite --class="syn" --name="syn" -e "syn -I"
+exec_always town syn "syn -I"
+for_window [instance="syn"] floating enable
+for_window [instance="syn"] resize set 800 600
+for_window [instance="syn"] move position center
+for_window [instance="syn"] move scratchpad
+for_window [instance="syn"] border pixel 1
 
 #FOR ALSA/AMIXER
 set $inc --no-startup-id amixer sset Master 2%+
@@ -67,7 +78,7 @@ bindsym $mod+q					kill
 bindsym $mod+Shift+q			kill
 
 bindsym $mod+Shift+space 	floating toggle
-bindsym $mod+space		focus mode_toggle
+#bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Shift+backspace	exec shutdown -h -r now
 
@@ -75,6 +86,8 @@ bindsym $mod+w			exec --no-startup-id $browser
 
 bindsym $mod+r			exec $term -e ranger 
 bindsym $mod+d			exec rofi -theme Monokai -show run
+# bindsym $mod+space		exec rofi -theme Monokai -show find -modi find:~/.local/share/rofi/finder.sh
+bindsym $mod+space		exec --no-startup-id rofi-locate
 
 bindsym $mod+c			exec xclip -o -selection clipboard | xclip
 bindsym $mod+v			exec xclip -o | xclip -i -selection clipboard
@@ -83,6 +96,7 @@ bindsym $mod+f 			fullscreen toggle
 
 bindsym $mod+a			[class="math" instance="math"] scratchpad show; move position center
 bindsym $mod+t			[class="trans" instance="trans"] scratchpad show; move position center
+bindsym $mod+s			[class="syn" instance="syn"] scratchpad show; move position center
 bindsym $mod+m			exec --no-startup-id $browser --app=https://messenger.com
 
 bindsym $mod+Shift+c	exec --no-startup-id $browser --app=$calendar
@@ -151,8 +165,11 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 
+bindsym $mod+Shift+F6	exec --no-startup-id fix-monitors
+bindsym $mod+F6			exec --no-startup-id fix-monitors && i3-restart
 bindsym $mod+F5			exec --no-startup-id i3-restart
 bindsym $mod+Shift+F5	exec --no-startup-id i3-reload
+bindsym --release $mod+Shift+Z	exec --no-startup-id screen-capture -s $HOME/Pictures/Screenshots/
 
 ###---Extra XF86 Keys---###
 #These are the extra media keys that some keyboards have.

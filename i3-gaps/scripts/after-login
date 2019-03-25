@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Wait for desktop environment to load
+sleep 1
+
+# Fix screen resolution
+fix-monitors > /dev/null 2>&1
+
+# Connect to wifi
+connect-wifi
+
+# Restart wm
+i3-restart
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+	exit 1
+fi
+
+FILE_NAME=$1
+FILE_OUTPUT_NAME=`echo $FILE_NAME | sed 's/\\.md/\\.pdf/g'`
+
+pandoc -t latex $FILE_NAME -o $FILE_OUTPUT_NAME
+echo $FILE_OUTPUT_NAME
+
+
+

@@ -13,6 +13,10 @@ sudo cp scripts/i3-reload /usr/local/bin/
 sudo cp scripts/i3-restart /usr/local/bin/
 sudo cp scripts/blurlock /usr/local/bin/
 sudo cp scripts/sus /usr/local/bin/
+sudo cp scripts/after-login /usr/local/bin/
+sudo cp scripts/fix-monitors /usr/local/bin/
+sudo cp scripts/town /usr/local/bin/
+sudo cp scripts/md-to-pdf /usr/local/bin/
 
 disp "Installing xcwd.."
 source scripts/install_xcwd

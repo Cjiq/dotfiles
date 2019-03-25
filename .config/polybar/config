@@ -20,8 +20,8 @@ col = #00f
 
 [bar/cjiq]
 ;monitor = ${env:MONITOR:HDMI-1}
-monitor = ${env:MONITOR}
-;monitor = ${env:MONITOR:}
+;monitor = ${env:MONITOR}
+monitor = ${env:MONITOR:}
 width = 100%
 height = 24
 ;offset-x = 1%
@@ -422,3 +422,8 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
+[module/nm-launcher]
+type = custom/text
+;content = 🌐
+content = "wifi"
+click-left = nm-connection-editor

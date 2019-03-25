@@ -90,6 +90,9 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# Composer
+export PATH=$PATH:$HOME/.config/composer/vendor/bin
+
 # Other stuff
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls="ls -latG"
@@ -97,11 +100,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	export LC_ALL=en_US.UTF-8
 	export TERM=xterm-256color
 else
+	export LANG=en_US.UTF-8
+	export LC_ALL=en_US.UTF-8
 	alias ls="ls -lt --color=auto"
 	alias svi="sudo vim"
 	alias vi="vim"
 	alias mp="modpoll"
 	alias lsm="ls -lat | more"
+	alias sctl="sudo systemctl"
+	alias nctl="sudo systemctl"
+	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	else
