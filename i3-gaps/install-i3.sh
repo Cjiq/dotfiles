@@ -67,6 +67,9 @@ while true; do
   esac
 done
 
+# Set keyboard layout
+sudo localectl --no-convert set-x11-keymap se pc104
+
 #Remove old i3 gen script
 disp "Create config generator script"
 rm -rf gen_i3_config

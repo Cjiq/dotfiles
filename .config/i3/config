@@ -25,11 +25,8 @@ exec_always --no-startup-id feh --bg-scale --randomize ~/.dotfiles/bgs/*.jpg
 exec_always --no-startup-id nm-applet
 
 ###---Useful scripts---###
-#Mini math buffer
-#I'll later bind this to mod+a.
 # exec termite -c "$HOME/.config/termite/config-math" --class="math" --name="math" -e "octave_math"
-exec_always town math "octave_math"
-
+exec_always --no-startup-id town math "octave_math"
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move position center
@@ -37,7 +34,7 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 
 # exec termite --class="trans" --name="trans" -e "trans :sv -I"
-exec_always town trans "trans :sv -I"
+exec_always --no-startup-id town trans "trans :sv -I"
 for_window [instance="trans"] floating enable
 for_window [instance="trans"] resize set 800 600
 for_window [instance="trans"] move position center
@@ -45,7 +42,7 @@ for_window [instance="trans"] move scratchpad
 for_window [instance="trans"] border pixel 1
 
 # exec termite --class="syn" --name="syn" -e "syn -I"
-exec_always town syn "syn -I"
+exec_always --no-startup-id town syn "syn -I"
 for_window [instance="syn"] floating enable
 for_window [instance="syn"] resize set 800 600
 for_window [instance="syn"] move position center
@@ -69,7 +66,7 @@ set $mute --no-startup-id amixer sset Master toggle
 for_window [class="^Spotify$"] move container to workspace $ws7
 #Make all windows transparet
 # for_window [class="^(.*?)$"] exec transset-df -a 0.94
-for_window [class="^Termite$"] exec transset-df -a 0.97
+for_window [class="^Termite$"] exec --no-startup-id transset-df -a 0.97
 
 ###---Keybindings---###
 bindsym $mod+Return				exec --no-startup-id $term
@@ -80,13 +77,12 @@ bindsym $mod+Shift+q			kill
 bindsym $mod+Shift+space 	floating toggle
 #bindsym $mod+space		focus mode_toggle
 
-bindsym $mod+Shift+backspace	exec shutdown -h -r now
+bindsym $mod+Shift+backspace	exec --no-startup-id shutdown -h -r now
 
 bindsym $mod+w			exec --no-startup-id $browser
 
 bindsym $mod+r			exec $term -e ranger 
 bindsym $mod+d			exec rofi -theme Monokai -show run
-# bindsym $mod+space		exec rofi -theme Monokai -show find -modi find:~/.local/share/rofi/finder.sh
 bindsym $mod+space		exec --no-startup-id rofi-locate
 
 bindsym $mod+c			exec xclip -o -selection clipboard | xclip
@@ -113,11 +109,11 @@ bindsym $mod+Shift+k 	move up 30
 bindsym $mod+l 			focus right
 bindsym $mod+Shift+l 	move right 30
 
-bindsym $mod+minus		split vertical ;; exec $term
-bindsym $mod+period		split horizontal ;; exec $term
+bindsym $mod+minus		split vertical ;; exec --no-startup-id $term
+bindsym $mod+period		split horizontal ;; exec --no-startup-id $term
 
-bindsym $mod+Ctrl+minus		split vertical ;; exec $term -d $(xcwd)
-bindsym $mod+Ctrl+period	split horizontal ;; exec $term -d $(xcwd)
+bindsym $mod+Ctrl+minus		split vertical ;; exec --no-startup-id $term -d $(xcwd)
+bindsym $mod+Ctrl+period	split horizontal ;; exec --no-startup-id $term -d $(xcwd)
 
 bindsym $mod+Ctrl+l		exec --no-startup-id blurlock
 bindsym $mod+Ctrl+s		exec --no-startup-id sus
@@ -184,9 +180,9 @@ bindsym XF86MonBrightnessUp	exec --no-startup-id backlight_mod 5
 # bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 # Play/Pause, change songs
-bindsym XF86AudioPlay exec sp play
-bindsym XF86AudioNext exec sp next
-bindsym XF86AudioPrev exec sp prev
+bindsym XF86AudioPlay exec --no-startup-id sp play
+bindsym XF86AudioNext exec --no-startup-id sp next
+bindsym XF86AudioPrev exec --no-startup-id sp prev
 
 exec --no-startup-id after-login
 exec --no-startup-id killall -q spotify

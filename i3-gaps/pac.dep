@@ -1,6 +1,5 @@
 bluez
 bluez-utils
-chromium
 feh
 htop
 i3-gaps
@@ -9,6 +8,7 @@ ranger
 rofi
 screenfetch
 termite
+translate-shell
 transset-df
 xautolock
 xcompmgr
