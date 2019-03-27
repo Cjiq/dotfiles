@@ -7,6 +7,7 @@ foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
+green = #55aa55
 alert = #bd2c40
 col = #00f
 
@@ -40,12 +41,16 @@ module-margin-right = 1
 font-0 = mono:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=11;1
-font-3 = mono:pixelsize=17;1
-font-4 = "Roboto:size=16:weight=bold;2"
+font-6 = mono:pixelsize=11:weight=bold;1
+;font-3 = mono:pixelsize=17;1
+;font-4 = "Roboto:size=16:weight=bold;2"
+font-3 = Font Awesome 5 Free:pixelsize=11;1
+font-4 = Font Awesome 5 Free Solid:pixelsize=11;1
+font-5 = Font Awesome 5 Brands:pixelsize=11;1
 
 modules-left = i3 ewmh spotify
 ; modules-center = 
-modules-right = brightness volume filesystem memory wlan eth battery temperature date powermenu
+modules-right = brightness volume filesystem memory wlan eth battery cpu temperature date powermenu
 
 tray-position = right
 tray-padding = 0
@@ -89,7 +94,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{T6}%{F#0a81f5}%mountpoint%%{F-}%{T-} %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -110,11 +115,13 @@ exec-if = spotify-current
 exec = spotify-current
 format-prefix = "Spotify: ♫ "
 tray-position = left
+
 [module/brightness]
 type = custom/script
 interval = 2
 exec = backlight_mod
-format-prefix = "☼: "
+format-prefix = " "
+format-suffix = %
 tray-position = right
 
 [module/bspwm]
@@ -226,18 +233,19 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+;format-underline = #f90000
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "Mem: "
+;format-prefix = "Mem: "
+;format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
+;format-underline = #4bffdc
+label = " %percentage_used%%"
 
 [module/wlan]
 type = internal/network
@@ -300,10 +308,11 @@ label = %date% %time%
 [module/volume]
 type = internal/volume
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+label-volume = 
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
+;format-muted-prefix = " "
+format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
@@ -327,23 +336,29 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = ADP1
+adapter = AC
 full-at = 98
 
-format-charging = %{T4}⚡%{T-}<label-charging>
-#format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+;format-charging = %{T4}⚡%{T-}<label-charging>
+format-charging = <animation-charging> <label-charging>
+fotmat-charging-prefix = ${color.foreground}
+;format-charging-underline = #ffb52a
 
 format-discharging = <label-discharging>
-#format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+;format-discharing = 
+;format-discharging = <ramp-capacity> <label-discharging>
+;format-discharging-underline = ${self.format-charging-underline}
 
 time-format = %H:%M
-label-discharing = %percentage% %time%
+;label-discharing = %percentage% %time%
+label-discharing = "s %percentage%"
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-prefix = "  "
+format-full-prefix-foreground = ${colors.foreground}
+;format-full-prefix-foreground = ${colors.green}
+;format-full-underline = ${self.format-charging-underline}
+;format-full = "Battery full"
+;format-full-foreground = ${colors.green}
 format-full = "Battery full"
 
 ramp-capacity-0 = 
@@ -351,10 +366,14 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+;animation-charging-0 = 
+;animation-charging-1 = 
+;animation-charging-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
 [module/temperature]
@@ -362,13 +381,14 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
-format-underline = #f22c40
-;format-underline = #f50a4d
+format = "<ramp> <label>"
+;format-underline = #f22c40
+format-underline = #f50a4d
+
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label = %temperature%
+label = " %temperature%"
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 

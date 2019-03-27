@@ -109,6 +109,7 @@ else
 	alias lsm="ls -lat | more"
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
+	alias hgrep="history |grep"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
