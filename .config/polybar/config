@@ -253,8 +253,9 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
 ;format-connected-underline = #9f78e1
+;format-connected-underline = #9f78e1
+format-connected-prefix = ""
 label-connected = %essid% %downspeed:5%
 
 format-disconnected =
@@ -344,14 +345,17 @@ format-charging = <animation-charging> <label-charging>
 fotmat-charging-prefix = ${color.foreground}
 ;format-charging-underline = #ffb52a
 
-format-discharging = <label-discharging>
-;format-discharing = 
-;format-discharging = <ramp-capacity> <label-discharging>
-;format-discharging-underline = ${self.format-charging-underline}
+format-discharging = <label-discharging><animation-discharging>
 
-time-format = %H:%M
+time-format = "%H Hours"
 ;label-discharing = %percentage% %time%
-label-discharing = "s %percentage%"
+format-discharging-prefix = " "
+label-discharging = "%percentage%%"
+
+animation-discharging-0 = " "
+animation-discharging-1 = 
+animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 2500
 
 format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.foreground}
