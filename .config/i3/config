@@ -10,7 +10,7 @@ client.focused	#fd971f #fd971f #fd971f #fd971f
 gaps inner 5
 gaps outer 2
 font pango:monospace 12, Awesome 10
-#font pango:Sans 12
+#font pango:DejaVu Sans Mono 15
 
 set $mod Mod1
 set $term termite

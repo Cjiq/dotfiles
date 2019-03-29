@@ -31,7 +31,9 @@ echo -n "> "
 read SYS
 case $SYS in
 	1);;
-	2)	sudo cp scripts/backlight_mod_lenovo /usr/local/bin/backlight_mod ;;
+	2)	sudo cp scripts/backlight_mod_lenovo /usr/local/bin/backlight_mod 
+		sudo cp ../.config/70-synaptics.conf.lenovo /etc/X11/xorg.conf.d/70-synaptics.conf
+		;;
 	3)	sudo cp scripts/backlight_mod_mac /usr/local/bin/backlight_mod ;; 
 	4)	sudo cp scripts/backlight_mod_dellv /usr/local/bin/backlight_mod ;; 
 esac
