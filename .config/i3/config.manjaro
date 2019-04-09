@@ -1,0 +1,49 @@
+## MANJARO CONFIG SECTION
+# -------------------------------
+
+exec --no-startup-id xrandr --output Virtual1 --mode 1920x1200
+
+# Lock screen
+bindsym $mod+9 exec --no-startup-id blurlock
+
+# Autostart applications
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+exec --no-startup-id start_conky_maia
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+
+# Start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+	i3bar_command i3bar
+	status_command i3status
+	position bottom
+
+## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#	tray_output primary
+#	tray_output eDP1
+
+	bindsym button4 nop
+	bindsym button5 nop
+#   font xft:URWGothic-Book 11
+	strip_workspace_numbers yes
+
+    colors {
+        background #222D31
+        statusline #f92672
+        separator  #454947
+
+#		                    border  backgr. text
+        focused_workspace	#292F34	#f92672	#F9FAF9
+        active_workspace	#595B5B #353836 #FDF6E3
+        inactive_workspace	#595B5B #222D31 #EEE8D5
+        binding_mode		#16a085 #2C2C2C #F9FAF9
+        urgent_workspace	#16a085 #FDF6E3 #E5201D
+    }
+}
+

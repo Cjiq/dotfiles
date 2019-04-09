@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Termite once with name - town
+
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+	exit 1
+fi
+
+args=("$@")
+NAME=${args[0]}
+CMD_TO_RUN=${args[1]}
+
+IS_RUNNING=`ps aux | grep termite | grep "class=$NAME" | wc -l` 
+
+if [ $IS_RUNNING == "0" ]; then
+	echo "Starting $CMD_TO_RUN"
+	nohup termite --class="$NAME" --name="$NAME" -e "$CMD_TO_RUN" > /dev/null 2>&1 & > /dev/null 2>&1 & 
+fi

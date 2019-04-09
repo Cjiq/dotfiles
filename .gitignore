@@ -1,3 +1,4 @@
 /scripts/.install-arch.sh.swp
-/nohup.out
+**/*/nohup.out
 /.DS_Store
+gen_i3_config

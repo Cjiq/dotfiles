@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source ~/.dotfiles/scripts/prepare.sh
+
+I3_CONFIG=~/.i3/config
+mkdir -p ~/.i3
+
+rm -rf $I3_CONFIG
+disp "Generating new i3 gaps config file.."
+echo "# NOTICE: GENERATED FILE IS READ-ONLY!!!" >> $I3_CONFIG
+echo "#         EDIT FILES ~/.dotfiles/.config/i3/ INSTEAD!!!" >> $I3_CONFIG
+echo "# -----------------------------------------------------" >> $I3_CONFIG
+cat ~/.dotfiles/.config/i3/config >> $I3_CONFIG

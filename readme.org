@@ -32,7 +32,7 @@ Run script by executing
 
 notice: install-arch.cjiq.tk just redirects you to the file found at Github.
 ** Disclaimer
-I will not take any resposability if any of my scritps causes any trouble. 
+I will not take any responsibility if any of my scripts causes any trouble. 
 Use them at your own risk. 
 ** License
 MIT

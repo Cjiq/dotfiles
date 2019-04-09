@@ -68,7 +68,7 @@ echo -e "Installing vundle plugins. This could take some time.."
 vim +PluginInstall +qa
 
 # Use same vim settings for root as for user.
-sudo ln -sf $HOME/.vim /.vim 
+sudo ln -sf $HOME/.vim /root/.vim 
 
 # Install patched fonts
 # If linux then install patched font.

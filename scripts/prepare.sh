@@ -41,3 +41,6 @@ if [[ ! -d "$HOME/.dotfiles" ]]; then
 	ln -s $HOME/.dotfiles $oldDir
 fi
 
+function disp() {
+	echo -e "${Gre}$1${RCol}"
+}

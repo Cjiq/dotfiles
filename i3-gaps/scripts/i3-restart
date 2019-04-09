@@ -1,0 +1,4 @@
+#!/bin/bash
+
+i3-config-gen
+i3-msg restart
