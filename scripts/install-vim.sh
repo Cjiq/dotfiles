@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ $DIST == "centos" ]]; then
 	sudo yum install -y vim > /dev/null
 elif [[ $DIST == "arch" ]]; then
-	sudo pacman -S --noconfirm vim > /dev/null
+	sudo pacman -S --noconfirm --needed vim > /dev/null
 fi
 
 while true; do
@@ -40,7 +40,7 @@ while true; do
 			elif [[ $DIST == "centos" ]]; then
 				sudo yum install -y neovim > /dev/null
 			elif [[ $DIST == "arch" ]]; then
-				sudo pacman -S --noconfirm neovim > /dev/null
+				sudo pacman -S --noconfirm --needed neovim > /dev/null
 			fi
 			ln -sf ~/.vim ~/.config/nvim
 			echo -e "${Gre}NeoVim installation complete! :D${RCol}"

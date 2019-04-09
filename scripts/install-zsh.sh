@@ -26,8 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ $DIST == "centos" ]]; then
 		sudo yum install -y zsh > /dev/null
 elif [[ $DIST == "arch" ]]; then
-		sudo pacman -R --noconfirm zsh > /dev/null
-		sudo pacman -S --noconfirm zsh > /dev/null
+		sudo pacman -S --noconfirm --needed zsh > /dev/null
 fi
 
 # Install oh-my-zsh
