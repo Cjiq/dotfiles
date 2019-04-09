@@ -8,6 +8,8 @@ source "${BASH_SOURCE%/*}/prepare.sh"
 # 3. Install plugins.
 # 4. Ask to set zsh as default shell.
 
+$cur_user=$(whoami)
+
 while true; do
   echo -e "${Gre}This script will download zsh and overwirte your old .zshrc config. Do you whish to continue? (Y/n)${RCol}"
   read yn
@@ -51,7 +53,7 @@ while true; do
   read yn
   case $yn in
     [Yy]* )
-			chsh -s /bin/zsh
+			sudo chsh -s /bin/zsh $cur_user
       break;;
 
     [Nn]* ) break;;

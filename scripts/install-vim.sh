@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ $DIST == "centos" ]]; then
 	sudo yum install -y vim > /dev/null
 elif [[ $DIST == "arch" ]]; then
-	sudo pacman -Sy --noconfirm vim > /dev/null
+	sudo pacman -S --noconfirm vim > /dev/null
 fi
 
 while true; do
@@ -40,7 +40,7 @@ while true; do
 			elif [[ $DIST == "centos" ]]; then
 				sudo yum install -y neovim > /dev/null
 			elif [[ $DIST == "arch" ]]; then
-				sudo pacman -Sy --noconfirm neovim > /dev/null
+				sudo pacman -S --noconfirm neovim > /dev/null
 			fi
 			ln -sf ~/.vim ~/.config/nvim
 			echo -e "${Gre}NeoVim installation complete! :D${RCol}"
@@ -52,11 +52,9 @@ done
 
 rm -rf ~/.vim
 
-
 # Install dotvim
 echo -e "Downloading dotvim.."
 git clone --quiet https://github.com/Cjiq/dotvim.git ~/.vim > /dev/null
-
 
 # Clone vundle and install to default install location
 echo -e "Downloading vundle.."
