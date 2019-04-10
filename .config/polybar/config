@@ -112,7 +112,7 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = custom/script
 interval = 2
 exec-if = spotify-current
-exec = spotify-current
+exec = "spotify-current"
 format-prefix = "Spotify: ♫ "
 tray-position = left
 

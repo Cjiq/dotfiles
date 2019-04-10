@@ -66,7 +66,7 @@ set $mute --no-startup-id amixer sset Master toggle
 for_window [class="^Spotify$"] move container to workspace $ws7
 #Make all windows transparet
 # for_window [class="^(.*?)$"] exec transset-df -a 0.94
-for_window [class="^Termite$"] exec --no-startup-id transset-df -a 0.97
+#for_window [class="^Termite$"] exec --no-startup-id transset-df -a 0.97
 
 ###---Keybindings---###
 bindsym $mod+Return				exec --no-startup-id $term

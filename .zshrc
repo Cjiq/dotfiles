@@ -93,6 +93,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Composer
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
+# Snap
+export PATH=$PATH:/var/lib/snapd/snap/bin
+
 # Other stuff
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls="ls -latG"
