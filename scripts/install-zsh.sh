@@ -8,6 +8,8 @@ source "${BASH_SOURCE%/*}/prepare.sh"
 # 3. Install plugins.
 # 4. Ask to set zsh as default shell.
 
+$cur_user=$(whoami)
+
 while true; do
   echo -e "${Gre}This script will download zsh and overwirte your old .zshrc config. Do you whish to continue? (Y/n)${RCol}"
   read yn
@@ -24,8 +26,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ $DIST == "centos" ]]; then
 		sudo yum install -y zsh > /dev/null
 elif [[ $DIST == "arch" ]]; then
-		sudo pacman -R --noconfirm zsh > /dev/null
-		sudo pacman -S --noconfirm zsh > /dev/null
+		sudo pacman -S --noconfirm --needed zsh > /dev/null
 fi
 
 # Install oh-my-zsh
@@ -51,7 +52,7 @@ while true; do
   read yn
   case $yn in
     [Yy]* )
-			chsh -s /bin/zsh
+			sudo chsh -s /bin/zsh $cur_user
       break;;
 
     [Nn]* ) break;;
