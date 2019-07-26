@@ -113,6 +113,10 @@ else
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
 	alias hgrep="history |grep"
+	alias d="docker"
+	alias dc="docker container"
+	alias di="docker image"
+	alias gopath="cd ~/go/src/"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"

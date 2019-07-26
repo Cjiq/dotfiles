@@ -64,6 +64,7 @@ set $mute --no-startup-id amixer sset Master toggle
 # set $mute --no-startup-id pamixer --allow-boost -t
 
 for_window [class="^Spotify$"] move container to workspace $ws7
+for_window [class="^Thunderbird$"] move container to workspace $ws1
 #Make all windows transparet
 # for_window [class="^(.*?)$"] exec transset-df -a 0.94
 #for_window [class="^Termite$"] exec --no-startup-id transset-df -a 0.97
@@ -193,3 +194,4 @@ bindsym XF86AudioPrev exec --no-startup-id sp prev
 exec --no-startup-id after-login
 exec --no-startup-id killall -q spotify
 exec --no-startup-id sleep 1; exec --no-startup-id spotify
+exec --no-startup-id sleep 1; exec --no-startup-id thunderbird
