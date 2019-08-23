@@ -1,0 +1,2 @@
+
+cat -s ~/.dotfiles/.config/i3/config.macbook >> $I3_CONFIG
