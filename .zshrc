@@ -93,6 +93,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Composer
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
+# Snap
+export PATH=$PATH:/var/lib/snapd/snap/bin
+
 # Other stuff
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls="ls -G"
@@ -109,6 +112,11 @@ else
 	alias mp="modpoll"
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
+	alias hgrep="history |grep"
+	alias d="docker"
+	alias dc="docker container"
+	alias di="docker image"
+	alias gopath="cd ~/go/src/"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"

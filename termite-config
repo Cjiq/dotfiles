@@ -33,7 +33,8 @@ foreground          = #f8f8f2
 foreground_bold     = #f5f4f1
 cursor              = #f5f4f1
 cursor_foreground   = #272822
-background          = rgba(39, 40, 34)
+#cursor_foreground	= #f5f4f1
+background          = rgb(39,40,34)
 
 # 16 color space
 
@@ -42,7 +43,8 @@ color0  = #272822
 color4  = #272822
 color8  = #75715e
 color7  = #f8f8f2
-color15 = #f9f8f5
+#color15 = #f9f8f5
+color15 = #FEFFFE
 
 # Red
 color1  = #f92672
@@ -71,7 +73,12 @@ color14 = #a1efe4
 # Extra colors
 color16 = #fd971f
 color17 = #cc6633
-color18 = #383830
-color19 = #49483e
+# color18 = #383830
+# color19 = #49483e
+#
+color18 = #f5f4f1
+color19 = #f5f4f1
 color20 = #a59f85
 color21 = #f5f4f1
+#
+
