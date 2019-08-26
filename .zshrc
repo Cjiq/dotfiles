@@ -95,7 +95,8 @@ export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
 # Other stuff
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	alias ls="ls -latG"
+	alias ls="ls -G"
+	alias lsblk="diskutil list"
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
 	export TERM=xterm-256color
@@ -106,10 +107,8 @@ else
 	alias svi="sudo vim"
 	alias vi="vim"
 	alias mp="modpoll"
-	alias lsm="ls -lat | more"
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
-	alias hgrep="history |grep"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
@@ -117,7 +116,11 @@ else
 		export TERM=xterm-256color
 	fi
 fi
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+
+alias hgrep="history |grep"
+alias lsm="ls -lat | more"
+
+if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
 fi
 # export PATH="$(brew --prefix php)/bin:$PATH"
