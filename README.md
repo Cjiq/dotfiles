@@ -1,6 +1,5 @@
 # dotfiles
-This repo is supposed to a hub for all my different configuration files and 
-useful scritps.
+Repo for config files and useful installation scripts.
 
 ## License
 MIT
