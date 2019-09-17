@@ -1,6 +1,5 @@
 ## Keybindings ##
 #=====================
-
 bindsym $mod+Return                 exec --no-startup-id $term
 bindsym $mod+Shift+Return           exec --no-startup-id term_at_pwd $term
 bindsym $mod+q                      kill
@@ -98,17 +97,28 @@ bindsym $mod+Shift+F5               exec --no-startup-id i3-reload
 bindsym --release $mod+Shift+Z      exec --no-startup-id screen-capture -s $HOME/Pictures/Screenshots/
 
 ###---Extra XF86 Keys---###
-bindsym XF86AudioMute               exec $mute
-bindsym XF86AudioLowerVolume        exec $dec
-bindsym XF86AudioRaiseVolume        exec $inc
 bindsym XF86MonBrightnessDown       exec --no-startup-id backlight_mod -5
 bindsym XF86MonBrightnessUp         exec --no-startup-id backlight_mod 5
 # Volume control
-# bindsym XF86AudioRaiseVolume      exec pactl set-sink-volume 0 +5%
-# bindsym XF86AudioLowerVolume      exec pactl set-sink-volume 0 -5%
-# bindsym XF86AudioMute             exec pactl set-sink-mute 0 toggle
+set $sink-id $(pacmd list-sinks | grep -e 'name:' -e 'index:' | grep "*" | \
+				cut -d ":" -f2 | cut -d " " -f2)
+
+#set $inc = "amixer -q sset Master,0 1+ unmute"
+#set $dec = "amixer -q sset Master,0 1- unmute"
+#set $mute = "amixer -q sset Master,0 toggle"
+
+set $inc = "pactl set-sink-volume $sink-id +10%"
+set $dec = "pactl set-sink-volume $sink-id -10%"
+set $mute = "pactl set-sink-mute $sink-id toggle"
+
+bindsym XF86AudioMute               exec --no-startup-id $mute
+bindsym XF86AudioLowerVolume        exec --no-startup-id $dec
+bindsym XF86AudioRaiseVolume        exec --no-startup-id $inc
 
 # Play/Pause, change songs
 bindsym XF86AudioPlay               exec --no-startup-id sp play
 bindsym XF86AudioNext               exec --no-startup-id sp next
 bindsym XF86AudioPrev               exec --no-startup-id sp prev
+
+exec_always --no-startup-id			fix-keyboard
+

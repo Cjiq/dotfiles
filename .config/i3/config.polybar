@@ -2,7 +2,7 @@
 #=====================
 
 # Launch polybar
-#exec_always --no-startup-id sh -c "~/.config/polybar/launch.sh"
+exec_always --no-startup-id sh -c "launch_polybar"
 
 # Use xautolock to lock pc due to inactivity
 exec --no-startup-id xautolock -time 5 -locker blurlock
