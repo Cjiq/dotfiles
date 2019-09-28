@@ -1,0 +1,124 @@
+## Keybindings ##
+#=====================
+bindsym $mod+Return                 exec --no-startup-id $term
+bindsym $mod+Shift+Return           exec --no-startup-id term_at_pwd $term
+bindsym $mod+q                      kill
+bindsym $mod+Shift+q                kill
+
+bindsym $mod+Shift+space            floating toggle
+#bindsym $mod+space                 focus mode_toggle
+
+bindsym $mod+Shift+backspace        exec --no-startup-id shutdown -h -r now
+
+bindsym $mod+w                      exec --no-startup-id $browser
+
+bindsym $mod+r                      exec $term -e ranger 
+bindsym $mod+d                      exec rofi -theme Monokai -show run
+bindsym $mod+space                  exec --no-startup-id rofi-locate
+
+bindsym $mod+c                      exec xclip -o -selection clipboard | xclip
+bindsym $mod+v                      exec xclip -o | xclip -i -selection clipboard
+
+bindsym $mod+f                      fullscreen toggle
+
+bindsym $mod+a                      [class="math" instance="math"] scratchpad show; move position center
+bindsym $mod+t                      [class="trans" instance="trans"] scratchpad show; move position center
+bindsym $mod+s                      [class="syn" instance="syn"] scratchpad show; move position center
+bindsym $mod+m                      exec --no-startup-id $browser --app=https://messenger.com
+
+bindsym $mod+Shift+c                exec --no-startup-id $browser --app=$calendar
+
+bindsym $mod+h                      focus left
+bindsym $mod+Shift+h                move left 30
+
+bindsym $mod+j                      focus down
+bindsym $mod+Shift+j                move down 30
+
+bindsym $mod+k                      focus up
+bindsym $mod+Shift+k                move up 30
+
+bindsym $mod+l                      focus right
+bindsym $mod+Shift+l                move right 30
+
+bindsym $mod+minus                  split vertical ;; exec --no-startup-id $term
+bindsym $mod+period                 split horizontal ;; exec --no-startup-id $term
+
+bindsym $mod+Ctrl+minus             split vertical ;; exec --no-startup-id $term -d $(xcwd)
+bindsym $mod+Ctrl+period            split horizontal ;; exec --no-startup-id $term -d $(xcwd)
+
+bindsym $mod+Ctrl+l                 exec --no-startup-id blurlock
+bindsym $mod+Ctrl+s                 exec --no-startup-id sus
+
+bindsym $mod+Ctrl+h                 resize shirnk width 5px or 5pt
+
+bindsym $mod+Ctrl+k                 resize grow height 5px or 5pt
+bindsym $mod+Ctrl+j                 resize shirnk height 5px or 5pt
+
+bindsym $mod+1                      workspace $ws1
+bindsym $mod+Shift+1                move container to workspace $ws1
+
+bindsym $mod+2                      workspace $ws2
+bindsym $mod+Shift+2                move container to workspace $ws2
+
+bindsym $mod+3                      workspace $ws3
+bindsym $mod+Shift+3                move container to workspace $ws3
+
+bindsym $mod+4                      workspace $ws4
+bindsym $mod+Shift+4                move container to workspace $ws4
+
+bindsym $mod+5                      workspace $ws5
+bindsym $mod+Shift+5                move container to workspace $ws5
+
+bindsym $mod+6                      workspace $ws6
+bindsym $mod+Shift+6                move container to workspace $ws6
+
+bindsym $mod+7                      workspace $ws7
+bindsym $mod+Shift+7                move container to workspace $ws7
+
+bindsym $mod+8                      workspace $ws8
+bindsym $mod+Shift+8                move container to workspace $ws8
+
+bindsym $mod+9                      workspace $ws9
+bindsym $mod+Shift+9                move container to workspace $ws9
+
+bindsym $mod+z                      move workspace to output left
+bindsym $mod+x                      move workspace to output right
+
+bindsym $mod+Ctrl+b                 exec --no-startup-id sp play
+bindsym $mod+Ctrl+n                 exec --no-startup-id sp prev
+bindsym $mod+Ctrl+m                 exec --no-startup-id sp next
+
+bindsym $mod+p                      workspace back_and_forth
+
+bindsym $mod+Shift+F6               exec --no-startup-id fix-monitors
+bindsym $mod+F6                     exec --no-startup-id fix-monitors && i3-restart
+bindsym $mod+F5                     exec --no-startup-id i3-restart
+bindsym $mod+Shift+F5               exec --no-startup-id i3-reload
+bindsym --release $mod+Shift+Z      exec --no-startup-id screen-capture -s $HOME/Pictures/Screenshots/
+
+###---Extra XF86 Keys---###
+bindsym XF86MonBrightnessDown       exec --no-startup-id backlight_mod -5
+bindsym XF86MonBrightnessUp         exec --no-startup-id backlight_mod 5
+# Volume control
+set $sink-id $(pacmd list-sinks | grep -e 'name:' -e 'index:' | grep "*" | \
+				cut -d ":" -f2 | cut -d " " -f2)
+
+#set $inc = "amixer -q sset Master,0 1+ unmute"
+#set $dec = "amixer -q sset Master,0 1- unmute"
+#set $mute = "amixer -q sset Master,0 toggle"
+
+set $inc = "pactl set-sink-volume $sink-id +10%"
+set $dec = "pactl set-sink-volume $sink-id -10%"
+set $mute = "pactl set-sink-mute $sink-id toggle"
+
+bindsym XF86AudioMute               exec --no-startup-id $mute
+bindsym XF86AudioLowerVolume        exec --no-startup-id $dec
+bindsym XF86AudioRaiseVolume        exec --no-startup-id $inc
+
+# Play/Pause, change songs
+bindsym XF86AudioPlay               exec --no-startup-id sp play
+bindsym XF86AudioNext               exec --no-startup-id sp next
+bindsym XF86AudioPrev               exec --no-startup-id sp prev
+
+exec_always --no-startup-id			fix-keyboard
+

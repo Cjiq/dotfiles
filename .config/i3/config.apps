@@ -1,0 +1,31 @@
+
+## Applications ##
+#=====================
+
+exec_always --no-startup-id xcompmgr &
+exec_always --no-startup-id feh --bg-scale --randomize ~/.dotfiles/bgs/*.jpg
+exec_always --no-startup-id nm-applet
+
+# Window control
+exec_always --no-startup-id town math "octave_math"
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move position center
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 1
+
+exec termite --class="trans" --name="trans" -e "trans :sv -I"
+exec_always --no-startup-id town trans "trans :sv -I"
+for_window [instance="trans"] floating enable
+for_window [instance="trans"] resize set 800 600
+for_window [instance="trans"] move position center
+for_window [instance="trans"] move scratchpad
+for_window [instance="trans"] border pixel 1
+
+exec termite --class="syn" --name="syn" -e "syn -I"
+exec_always --no-startup-id town syn "syn -I"
+for_window [instance="syn"] floating enable
+for_window [instance="syn"] resize set 800 600
+for_window [instance="syn"] move position center
+for_window [instance="syn"] move scratchpad
+for_window [instance="syn"] border pixel 1

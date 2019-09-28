@@ -17,6 +17,7 @@ sudo cp scripts/after-login /usr/local/bin/
 sudo cp scripts/fix-monitors /usr/local/bin/
 sudo cp scripts/town /usr/local/bin/
 sudo cp scripts/md-to-pdf /usr/local/bin/
+sudo cp scripts/launch_polybar /usr/local/bin/
 
 disp "Installing xcwd.."
 source scripts/install_xcwd
@@ -34,7 +35,10 @@ case $SYS in
 	2)	sudo cp scripts/backlight_mod_lenovo /usr/local/bin/backlight_mod 
 		sudo cp ../.config/70-synaptics.conf.lenovo /etc/X11/xorg.conf.d/70-synaptics.conf
 		;;
-	3)	sudo cp scripts/backlight_mod_mac /usr/local/bin/backlight_mod ;; 
+	3)	sudo cp scripts/backlight_mod_mac /usr/local/bin/backlight_mod 
+        sudo pacman -Sy xf86-video-intel
+        sudo pacman -Rns xf86-video-vesa
+        ;; 
 	4)	sudo cp scripts/backlight_mod_dellv /usr/local/bin/backlight_mod ;; 
 esac
 sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
@@ -43,12 +47,14 @@ disp "Syncing pacman.."
 sudo pacman -Sy
 disp "Installing pacman dependencies.."
 cat pac.dep | paste -sd " " | xargs sudo pacman -S --noconfirm --needed
-disp "Installing yay..."
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
-cd ..
-rm -rf yay
+if ! type yay > /dev/null; then
+    disp "Installing yay..."
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si --noconfirm
+    cd ..
+    rm -rf yay
+fi 
 disp "Installing yay dependencies.."
 cat yay.dep | paste -sd " " | xargs yay -S --noconfirm --needed
 
@@ -70,27 +76,48 @@ while true; do
 done
 
 # Set keyboard layout
-sudo localectl --no-convert set-x11-keymap se pc104
+if [ "$SYS" -eq "3" ]; then
+	sudo localectl --no-convert set-x11-keymap se macbook79
+else
+	sudo localectl --no-convert set-x11-keymap se pc104
+fi
 
-#Remove old i3 gen script
+disp "Pick your i3 modifier key:"
+echo " 1) left alt"
+echo " 2) left CMD"
+echo -n "> "
+read MOD
+case $MOD in
+	1)	i3_mod=Mod1;;
+	2)	i3_mod=Mod4;;
+	*)	i3_mod=Mod1;;
+esac
+printf "set $" > ~/.dotfiles/.config/i3/config.mod
+printf "mod $i3_mod" >> ~/.dotfiles/.config/i3/config.mod
+
+# Generate i3-config-file
 disp "Create config generator script"
 rm -rf gen_i3_config
-cat gen/main > gen_i3_config
+order="design mod vars apps"
 if $IS_MANJARO; then
-	disp "Adding config section for manjaro.."
-	cat gen/manjaro >> gen_i3_config
-	sudo ln -sf ~/.dotfiles/.config/i3/config.manjaro ~/.i3-config-manjaro
+	order="$order manjaro"
 else
 	disp "Adding config section for polybar.."
-	yay -S --noconfirm polybar
-	cat gen/polybar >> gen_i3_config
+	yay -S --noconfirm --needed polybar
+	order="$order polybar"
 	sudo ln -sf ~/.dotfiles/.config/i3/config.polybar ~/.i3-config-polybar
 	ln -sf ~/.dotfiles/.config/polybar ~/.config/polybar
 fi
-cat gen/end >> gen_i3_config
+order="$order keys end"
+echo "order='$order'" > gen/vars
+cat gen/head gen/vars gen/main gen/end > gen_i3_config
 chmod +x gen_i3_config
 disp "Run the script.."
-source gen_i3_config
+. gen_i3_config
+
+# Rofi
+ln -sf ~/.dotfiles/.config/rofi/confg ~/.config/rofi/config
+
 disp "Making alias to run config gen.."
 sudo ln -sf ~/.dotfiles/i3-gaps/gen_i3_config /usr/local/bin/i3-config-gen
 sudo ln -sf ~/.dotfiles/.config/i3/config ~/.i3-config
