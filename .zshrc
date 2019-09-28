@@ -110,6 +110,9 @@ else
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
 	alias hgrep="history |grep"
+	alias dc="docker container"
+	alias di="docker images"
+	alias d="docker"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
@@ -117,7 +120,10 @@ else
 		export TERM=xterm-256color
 	fi
 fi
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
+# Match if arch to autostart xorg
+if uname -r | grep -iqF "arch"; then
+	if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+		exec startx
+	fi
 fi
 # export PATH="$(brew --prefix php)/bin:$PATH"
