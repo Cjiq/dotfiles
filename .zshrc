@@ -113,9 +113,9 @@ else
 	alias sctl="sudo systemctl"
 	alias nctl="sudo systemctl"
 	alias hgrep="history |grep"
-	alias d="docker"
 	alias dc="docker container"
-	alias di="docker image"
+	alias di="docker images"
+	alias d="docker"
 	alias gopath="cd ~/go/src/"
 	export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
@@ -128,7 +128,8 @@ fi
 alias hgrep="history |grep"
 alias lsm="ls -lat | more"
 
-# if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-#   exec startx
-# fi
-# export PATH="$(brew --prefix php)/bin:$PATH"
+if uname -r | grep -iqF "arch"; then
+	if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+		exec startx
+	fi
+fi
