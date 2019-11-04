@@ -106,7 +106,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
-	alias ls="ls -lt --color=auto"
+	alias ls="ls --color=auto"
 	alias svi="sudo vim"
 	alias vi="vim"
 	alias mp="modpoll"
@@ -128,7 +128,7 @@ fi
 alias hgrep="history |grep"
 alias lsm="ls -lat | more"
 
-if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  exec startx
-fi
+# if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+#   exec startx
+# fi
 # export PATH="$(brew --prefix php)/bin:$PATH"
