@@ -85,6 +85,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Random comment
+#
+# Load shortcut aliases
+source ~/.shortcuts
 
 # Golang :)
 export GOPATH=$HOME/go
@@ -127,9 +130,11 @@ fi
 
 alias hgrep="history |grep"
 alias lsm="ls -lat | more"
+alias vim="nvim"
 
 if uname -r | grep -iqF "arch"; then
 	if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
 		exec startx
 	fi
 fi
+
