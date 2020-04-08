@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=~/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -8,6 +8,8 @@
 # ZSH_THEME="bira"
 ZSH_THEME="af-magic"
 
+# Fix "Insecure completion-dependent directories detected"
+ZSH_DISABLE_COMPFIX=true 
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -87,7 +89,9 @@ source $ZSH/oh-my-zsh.sh
 # Random comment
 #
 # Load shortcut aliases
-source ~/.shortcuts
+if test -d "~/.shortcuts"; then
+    source ~/.shortcuts
+fi
 
 # Golang :)
 export GOPATH=$HOME/go

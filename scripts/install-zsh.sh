@@ -25,6 +25,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 		brew install zsh
 elif [[ $DIST == "centos" ]]; then
 		sudo yum install -y zsh > /dev/null
+elif [[ $DIST == "Ubuntu" ]]; then
+		sudo apt-get install -y zsh > /dev/null
 elif [[ $DIST == "arch" ]]; then
 		sudo pacman -S --noconfirm --needed zsh > /dev/null
 fi
