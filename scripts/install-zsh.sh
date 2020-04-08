@@ -47,6 +47,8 @@ git clone --quiet git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh > /de
 echo -e "Downloading zsh-autosuggestions.."
 git clone --quiet https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions > /dev/null
 
+echo -e "Installing zplug"
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # Use zsh as default
 while true; do

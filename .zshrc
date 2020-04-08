@@ -1,3 +1,21 @@
+# zplug
+source ~/.zplug/init.zsh
+zplug "supercrabtree/k"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
+# Show hidden files
+setopt globdots
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -9,10 +27,10 @@ export ZSH=~/.oh-my-zsh
 ZSH_THEME="af-magic"
 
 # Fix "Insecure completion-dependent directories detected"
-ZSH_DISABLE_COMPFIX=true 
+ZSH_DISABLE_COMPFIX=true
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -28,10 +46,10 @@ ZSH_DISABLE_COMPFIX=true
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -45,6 +63,7 @@ ZSH_DISABLE_COMPFIX=true
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -123,12 +142,12 @@ else
 	alias dc="docker container"
 	alias di="docker images"
 	alias d="docker"
+	alias gis="git status"
+	alias gia="git add"
 	alias gopath="cd ~/go/src/"
-	export TERM=xterm-256color
+    export TERM=screen-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
-	else
-		export TERM=xterm-256color
 	fi
 fi
 
