@@ -154,6 +154,10 @@ fi
 alias hgrep="history |grep"
 alias lsm="ls -lat | more"
 alias vim="nvim"
+project_find() {
+    grep $1 --color='always' * -r --exclude-dir=node_modules --exclude-dir=.next | egrep -v 'yarn|package.json' --color='always'
+}
+alias projf="project_find"
 
 if uname -r | grep -iqF "arch"; then
 	if [ ! "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
