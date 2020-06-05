@@ -20,15 +20,18 @@ while true; do
   esac
 done
 
-echo -e "Installing zsh.. "
+echo -e "Installing zsh for $DIST"
 if [[ "$OSTYPE" == "darwin"* ]]; then
 		brew install zsh
 elif [[ $DIST == "centos" ]]; then
 		sudo yum install -y zsh > /dev/null
-elif [[ $DIST == "Ubuntu" ]]; then
+elif [[ $DIST == "Ubuntu" ]] || [[ "$DIST" == "debian" ]]; then
 		sudo apt-get install -y zsh > /dev/null
 elif [[ $DIST == "arch" ]]; then
 		sudo pacman -S --noconfirm --needed zsh > /dev/null
+else
+	echo "Dist not supported. Aborting..."
+	exit 1
 fi
 
 # Install oh-my-zsh
