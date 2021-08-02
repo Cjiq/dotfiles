@@ -1,6 +1,7 @@
 # zplug
 source ~/.zplug/init.zsh
 zplug "supercrabtree/k"
+zplug "zsh-users/zsh-autosuggestions"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
