@@ -45,7 +45,7 @@ if [ -d "$ZSH" ]; then
 fi
 
 echo -e "Downloading oh-my-zsh.."
-git clone --quiet git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh > /dev/null
+git clone --quiet https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh > /dev/null
 
 echo -e "Downloading zsh-autosuggestions.."
 git clone --quiet https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions > /dev/null
