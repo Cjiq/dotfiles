@@ -28,6 +28,7 @@ echo " 1) VirtualBox"
 echo " 2) Lenovo"
 echo " 3) Macbook"
 echo " 4) Dell Vostro"
+echo " 5) Desktop"
 echo -n "> "
 read SYS
 case $SYS in
@@ -40,8 +41,12 @@ case $SYS in
         sudo pacman -Rns xf86-video-vesa
         ;; 
 	4)	sudo cp scripts/backlight_mod_dellv /usr/local/bin/backlight_mod ;; 
+	5)  SKIP_BACKLGIHT=1;;
 esac
-sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
+
+if [ ! -n "$SKIP_BACKLIGHT" ]; then
+  sudo cp sys/backlight.rules /etc/udev/rules.d/backlight.rules
+fi
 
 disp "Syncing pacman.."
 sudo pacman -Sy
