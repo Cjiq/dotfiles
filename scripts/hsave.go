@@ -7,7 +7,14 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"flag"
 )
+
+type context struct {
+	s bool
+}
+
+var con *context = &context{}
 
 func main() {
 	shell := getShellName()

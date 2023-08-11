@@ -134,7 +134,6 @@ else
 	alias svi="sudo vim"
 	alias mp="modpoll"
 	alias sctl="sudo systemctl"
-	alias nctl="sudo systemctl"
 	alias hgrep="history |grep"
 	alias dc="docker container"
 	alias di="docker images"
@@ -142,10 +141,12 @@ else
 	alias gis="git status"
 	alias gia="git add"
 	alias gopath="cd ~/go/src/"
+	export PATH="$PATH:$(go env GOPATH)/bin"
     export TERM=screen-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	fi
+	alias termite="alacritty"
 fi
 
 alias hgrep="history |grep"
