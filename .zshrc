@@ -112,6 +112,7 @@ fi
 
 # Golang :)
 export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Composer
@@ -166,4 +167,5 @@ if uname -r | grep -iqF "arch"; then
     export PATH=$PATH:$ANDROID_HOME/tools/bin
     export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
+
 
