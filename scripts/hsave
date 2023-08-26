@@ -1,0 +1,48 @@
+#!/bin/sh
+HSAVE_DB="$HOME/.hsave_db"
+
+usage() {
+cat << EOF
+Usage: $0 [OPTIONS]
+
+OPTIONS:
+   -h, --help   Show help
+   -s, --show   Show all the stored useful commands
+
+To save the last command just run hsave without any argumetns.
+EOF
+}
+save() {
+    HIST_VAR="$HOME/.$(echo $SHELL | rev | cut -d '/' -f 1 | rev)_history"
+    HISTFILE=$HIST_VAR
+    set -o history
+    LAST_HIST=$(history | grep -v "hsave" | tail -n1)
+    CMD=$(echo $LAST_HIST | rev | cut -d ';' -f 1 | rev)
+    echo $CMD >> $HSAVE_DB
+}
+show() {
+    less $HSAVE_DB
+}
+
+if [ $# -eq 0 ]; then
+    save
+    exit 1
+fi
+
+while getopts "hsx" OPTION
+do
+  case $OPTION in
+      h)
+        usage
+        exit 1
+        ;;
+      s)
+        show
+        ;;
+      ?)
+        usage
+        exit
+        ;;
+  esac
+done
+
