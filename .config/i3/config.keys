@@ -8,7 +8,7 @@ bindsym $mod+Shift+q                kill
 bindsym $mod+Shift+space            floating toggle
 #bindsym $mod+space                 focus mode_toggle
 
-bindsym $mod+Shift+backspace        exec --no-startup-id shutdown -h -r now
+#bindsym $mod+Shift+backspace        exec --no-startup-id shutdown -h -r now
 
 bindsym $mod+w                      exec --no-startup-id $browser
 
@@ -114,11 +114,20 @@ set $mute = "pactl set-sink-mute $sink-id toggle"
 bindsym XF86AudioMute               exec --no-startup-id $mute
 bindsym XF86AudioLowerVolume        exec --no-startup-id $dec
 bindsym XF86AudioRaiseVolume        exec --no-startup-id $inc
+#bindsym XF86AudioMute               exec $mute
+#bindsym XF86AudioLowerVolume        exec $dec
+#bindsym XF86AudioRaiseVolume        exec $inc
+#bindsym XF86MonBrightnessDown       exec --no-startup-id backlight_mod -5
+#bindsym XF86MonBrightnessUp         exec --no-startup-id backlight_mod 5
+# Volume control
+#bindsym XF86AudioRaiseVolume        exec pactl set-sink-volume 0 +5%
+#bindsym XF86AudioLowerVolume        exec pactl set-sink-volume 0 -5%
+#bindsym XF86AudioMute               exec pactl set-sink-mute 0 toggle
 
 # Play/Pause, change songs
-bindsym XF86AudioPlay               exec --no-startup-id sp play
-bindsym XF86AudioNext               exec --no-startup-id sp next
-bindsym XF86AudioPrev               exec --no-startup-id sp prev
+#bindsym XF86AudioPlay               exec --no-startup-id sp play
+#bindsym XF86AudioNext               exec --no-startup-id sp next
+#bindsym XF86AudioPrev               exec --no-startup-id sp prev
 
 exec_always --no-startup-id			fix-keyboard
 

@@ -35,6 +35,7 @@ cursor              = #f5f4f1
 cursor_foreground   = #272822
 #cursor_foreground	= #f5f4f1
 background          = rgb(39,40,34)
+scrollback_lines = 100000
 
 # 16 color space
 

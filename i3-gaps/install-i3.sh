@@ -118,6 +118,9 @@ disp "Run the script.."
 # Rofi
 ln -sf ~/.dotfiles/.config/rofi/confg ~/.config/rofi/config
 
+# CUPS
+sudo systemctl enable org.cups.cupsd.service
+
 disp "Making alias to run config gen.."
 sudo ln -sf ~/.dotfiles/i3-gaps/gen_i3_config /usr/local/bin/i3-config-gen
 sudo ln -sf ~/.dotfiles/.config/i3/config ~/.i3-config

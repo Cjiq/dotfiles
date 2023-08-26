@@ -1,5 +1,6 @@
 bluez
 bluez-utils
+cups
 feh
 htop
 i3-gaps
@@ -18,3 +19,4 @@ xorg-server
 xorg-xinit
 xorg-xrandr
 zathura
+zathura-pdf-mupdf
