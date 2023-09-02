@@ -127,7 +127,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias lsblk="diskutil list"
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
-	export TERM=xterm-256color
+	# export TERM=xterm-256color
 else
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
@@ -143,7 +143,7 @@ else
 	alias gia="git add"
 	alias gopath="cd ~/go/src/"
 	export PATH="$PATH:$(go env GOPATH)/bin"
-    export TERM=screen-256color
+  # export TERM=xterm-256color
 	if [[ $TERM == "xterm-termite" ]]; then
 		alias ssh="TERM='xterm-color' ssh"
 	fi
@@ -152,6 +152,7 @@ fi
 
 alias hgrep="history |grep"
 alias lsm="ls -lat | more"
+alias tmux='tmux -2'
 project_find() {
     grep $1 --color='always' * -r --exclude-dir=node_modules --exclude-dir=.next | egrep -v 'yarn|package.json' --color='always'
 }
