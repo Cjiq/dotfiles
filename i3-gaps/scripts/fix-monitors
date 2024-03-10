@@ -2,10 +2,12 @@
 
 xrandr --auto
 sleep 0.05
-xrandr --output DP1-1 --mode 1600x1200
+xrandr --output DP-2.8 --mode 1600x900
 sleep 0.05
-xrandr --output DP1-2 --mode 1600x1200
+xrandr --output DP-2.1.8 --mode 1600x900
 sleep 0.05
-xrandr --output DP1-3 --mode 1600x1200
-sleep 0.05
-xrandr --output eDP1 --mode 1920x1080 --output DP1-1 --mode 1920x1200 --right-of eDP1 --output DP1-2 --mode 1920x1200 --right-of DP1-1
+xrandr --output HDMI-0 --mode 2560x1440 -r 144 \
+  --output DP-2.8 --mode 1920x1080 --right-of HDMI-0 \
+  --output DP-2.1.8 --mode 1920x1080 --left-of HDMI-0 \
+
+
