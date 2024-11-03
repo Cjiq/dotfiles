@@ -115,6 +115,9 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# npm
+export PATH=$PATH:/usr/lib/node_modules
+
 # Composer
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
@@ -169,3 +172,10 @@ if uname -r | grep -iqF "arch"; then
 fi
 
 
+
+# bun completions
+[ -s "/home/cjiq/.bun/_bun" ] && source "/home/cjiq/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

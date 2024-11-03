@@ -1,2 +1,2 @@
 exec --no-startup-id after-login
-exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id /sbin/xmodmap ~/.Xmodmap
