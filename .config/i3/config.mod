@@ -1,1 +1,1 @@
-set $mod Mod4
+set $mod Mod1

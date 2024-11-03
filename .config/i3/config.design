@@ -7,3 +7,7 @@ client.focused	#fd971f #fd971f #fd971f #fd971f
 gaps inner 0
 gaps outer 0
 font pango:DejaVuSansM Nerd Font Mono 12, Awesome 10
+
+#yay -S ttf-dejavu-nerd
+#fc-cache -fv
+#fc-list | grep "Nerd"

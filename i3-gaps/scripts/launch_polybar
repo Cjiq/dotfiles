@@ -5,12 +5,16 @@ killall -q polybar
 while ! pgrep i3 >/dev/null; do sleep 2; done
 sleep 1
 
+LOG_PATH=~/.local/state/polybar
+mkdir -p $LOG_PATH
+
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 if type "xrandr" > /dev/null; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar --reload cjiq &
+    MONITOR=$m polybar --reload cjiq 2> $LOG_PATH/output.log &
+
   done
 else
-  nohup polybar --reload cjiq > /dev/null 2&>1 &
+  nohup polybar --reload cjiq 2> $LOG_PATH/output.log &
 fi
 
